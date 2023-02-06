@@ -1,0 +1,21 @@
+{
+	"version": "0.2",
+	"language": "en",
+	"words": [
+		"degit",
+		"esbuild",
+		"utilities",
+		"octocat",
+		"rmrf",
+		"socio",
+		"surveyplanet"
+	],
+	"flagWords": [],
+	"ignorePaths": [
+		"package.json",
+		"package-lock.json",
+		"yarn.lock",
+		"tsconfig.json",
+		"node_modules/**"
+	]
+}
