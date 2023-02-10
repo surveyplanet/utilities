@@ -22,7 +22,7 @@ jobs:
 
             - name: Install packages
               run: |
-                  npm install --no-save esbuild
+                  npm install -D esbuild
                   npm ci --ignore-scripts
               env:
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
