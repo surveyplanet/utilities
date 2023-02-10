@@ -21,7 +21,11 @@ jobs:
                   node-version: 18
 
             - name: Install packages
-              run: npm ci
+              run: |
+                  npm install -D esbuild
+                  npm ci --ignore-scripts
+              env:
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             - name: Security audit
               run: npm audit --audit-level=moderate --omit=dev
@@ -45,4 +49,4 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-              run: npm run semantic-release
+              run: npm run release
