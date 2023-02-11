@@ -421,7 +421,7 @@ describe('Validator', () => {
 		expect(errors).toBeDefined();
 		expect(errors.length).toBeGreaterThanOrEqual(testData.length);
 		removeAllValidationErrors();
-		const errs = document.querySelectorAll('validation-errors');
+		const errs = document.querySelectorAll('validation-error');
 		expect(errs.length).toBe(0);
 		const msgs = document.querySelectorAll('validation-error-message');
 		expect(msgs.length).toBe(0);
