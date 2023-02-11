@@ -87,7 +87,7 @@ Validate form inputs
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data-validate-rules`       | A comma separated list of rules to use for validation. See validation rules below.                                                                                                     |
 | `data-validate-message`     | A custom error message instead of the default one. Use `%l` to add the input label to your element and `%p` to the validation property. For example if you use `minLength[8]` %p is 8. |
-| `data-validate-hide-errors` | Don't automatically show the validation error under the text box. You can handel them yourself this way.                                                                               |
+| `data-validate-show-errors` | Automatically create and show the validation error under the text box.                                                                                                                 |
 
 #### Validation rules
 

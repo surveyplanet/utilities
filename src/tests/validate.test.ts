@@ -223,7 +223,7 @@ describe('Validator', () => {
 			input.setAttribute('class', `validate-test`);
 			p.appendChild(input);
 			inputForm.appendChild(p);
-			console.log('\n', p.innerHTML);
+			// console.log('\n', p.innerHTML);
 		}
 
 		const checkRadioForm = document.getElementById(
