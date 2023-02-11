@@ -211,7 +211,9 @@ describe('Validator', () => {
 			const p = document.createElement('p');
 			const label = document.createElement('label');
 
-			label.textContent = item.rule;
+			label.textContent =
+				item.rule === 'required' ? item.rule + ' *' : item.rule;
+			label.setAttribute('for', item.id);
 			p.appendChild(label);
 
 			const input = document.createElement('input');
@@ -374,6 +376,7 @@ describe('Validator', () => {
 				expect(label.textContent).toBe(
 					errors[0].error.replace(/<\/?em>/g, '')
 				);
+				expect(label.textContent?.endsWith('*')).toBeFalsy();
 			}
 
 			for (const value of item.values) {
@@ -429,16 +432,22 @@ describe('Validator', () => {
 		const input = document.getElementById(
 			testData[0].id
 		) as HTMLInputElement;
+
 		expect(input).toBeDefined();
 		input.value = '';
 		input.setAttribute('data-validate-message', customMessage);
 		input.setAttribute('data-show-message', customMessage);
 		const errors = validate(input);
+
 		expect(errors.length).toBe(1);
 		expect(errors[0].error).toBe(customMessage.replace('%l', 'required'));
-		const errLabel = document.querySelector(`label[for="${input.name}"]`);
+		const labels = input.parentElement?.querySelectorAll(
+			`label[for="${input.name}"]`
+		);
+		expect(labels).toHaveLength(2);
+		const errLabel = labels?.item(1) as HTMLLabelElement;
 		expect(errLabel).toBeDefined();
-		expect(errLabel?.textContent).toBe(errors[0].error);
+		expect(errLabel.textContent?.replace('*', '')).toBe(errors[0].error);
 	});
 
 	it('should validation error form multiple rules', () => {

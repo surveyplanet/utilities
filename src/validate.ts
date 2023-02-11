@@ -504,6 +504,7 @@ export default function validate(
 				: rule.message;
 
 			const errMsg = parseValidationMessage(msg, labelText, params.param);
+
 			const err: ValidatorError = {
 				id: input.id,
 				name: input.name,
@@ -543,8 +544,12 @@ export function getInputLabel(input: FormInput): string {
 
 	const placeholderText = input.getAttribute('placeholder');
 
-	if (label) {
-		labelText = label.innerText;
+	if (label?.innerText?.length) {
+		labelText = label.innerText.trim();
+
+		if (labelText.length > 1 && labelText.endsWith('*')) {
+			labelText.slice(0, -1);
+		}
 	} else if (placeholderText?.length) {
 		labelText = placeholderText;
 	} else if (input.name.length) {
