@@ -373,9 +373,11 @@ describe('Validator', () => {
 				const label = input.nextSibling as HTMLLabelElement;
 
 				expect(label).toBeDefined();
+				console.log(label.textContent);
 				expect(label.textContent).toBe(
 					errors[0].error.replace(/<\/?em>/g, '')
 				);
+
 				expect(label.textContent?.endsWith('*')).toBeFalsy();
 			}
 

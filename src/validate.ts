@@ -544,11 +544,11 @@ export function getInputLabel(input: FormInput): string {
 
 	const placeholderText = input.getAttribute('placeholder');
 
-	if (label?.innerText?.length) {
-		labelText = label.innerText.trim();
+	if (label?.textContent?.length) {
+		labelText = label.textContent.trim();
 
 		if (labelText.length > 1 && labelText.endsWith('*')) {
-			labelText.slice(0, -1);
+			labelText = labelText.replace(/\s?\*$/, '');
 		}
 	} else if (placeholderText?.length) {
 		labelText = placeholderText;
