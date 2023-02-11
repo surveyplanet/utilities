@@ -219,10 +219,11 @@ describe('Validator', () => {
 			input.id = item.id;
 			input.name = input.id;
 			input.setAttribute('data-validate-rules', item.rule);
+			input.setAttribute('data-validate-show-errors', 'true');
 			input.setAttribute('class', `validate-test`);
 			p.appendChild(input);
 			inputForm.appendChild(p);
-			// console.log('\n', p.innerHTML);
+			console.log('\n', p.innerHTML);
 		}
 
 		const checkRadioForm = document.getElementById(
@@ -431,6 +432,7 @@ describe('Validator', () => {
 		expect(input).toBeDefined();
 		input.value = '';
 		input.setAttribute('data-validate-message', customMessage);
+		input.setAttribute('data-show-message', customMessage);
 		const errors = validate(input);
 		expect(errors.length).toBe(1);
 		expect(errors[0].error).toBe(customMessage.replace('%l', 'required'));

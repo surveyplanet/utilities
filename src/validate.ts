@@ -470,13 +470,12 @@ export default function validate(
 		return validateAll(null);
 	}
 
-	const hideErrors =
-		Object.prototype.hasOwnProperty.call(
-			input.dataset,
-			'validateHideErrors'
-		) && input.dataset.validateHideErrors !== 'false';
+	const showErrors = Object.prototype.hasOwnProperty.call(
+		input.dataset,
+		'validateShowErrors'
+	);
 
-	if (!hideErrors) {
+	if (showErrors) {
 		removeAllValidationErrors();
 	}
 
@@ -521,7 +520,7 @@ export default function validate(
 		}
 	}
 
-	if (!hideErrors && errors.length) {
+	if (showErrors && errors.length) {
 		renderValidationError(input, errors[0]);
 	}
 
