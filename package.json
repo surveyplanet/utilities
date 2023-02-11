@@ -32,7 +32,6 @@
 		"test:coverage": "vitest run --coverage",
 		"test:setup": "node -r ./esbuild-hook ./scripts/testSetup",
 		"spell": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
-		"publish": "publish",
 		"release": "semantic-release"
 	},
 	"devDependencies": {
