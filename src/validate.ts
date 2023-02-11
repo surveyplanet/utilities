@@ -459,7 +459,7 @@ export function validateAll(inputs: InputCollection): ValidatorError[] {
  *   name="email"
  *   data-validate-rules='require,email'
  *   data-validate-message="My custom validation message (or just use the default)"
- *   data-validate-hide-errors />
+ *   data-validate-show-errors />
  */
 export default function validate(
 	input: FormInput | null | undefined
@@ -470,13 +470,13 @@ export default function validate(
 		return validateAll(null);
 	}
 
-	const hideErrors =
+	const showErrors =
 		Object.prototype.hasOwnProperty.call(
 			input.dataset,
-			'validateHideErrors'
-		) && input.dataset.validateHideErrors !== 'false';
+			'validateShowErrors'
+		) && input.dataset.validateShowErrors !== 'false';
 
-	if (!hideErrors) {
+	if (showErrors) {
 		removeAllValidationErrors();
 	}
 
@@ -521,7 +521,7 @@ export default function validate(
 		}
 	}
 
-	if (!hideErrors && errors.length) {
+	if (showErrors && errors.length) {
 		renderValidationError(input, errors[0]);
 	}
 
