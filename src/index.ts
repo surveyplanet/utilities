@@ -1,4 +1,5 @@
 export { default as delay } from './delay';
+export { default as dasherize } from './dasherize';
 export {
 	default as validate,
 	validateAll,
