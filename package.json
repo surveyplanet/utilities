@@ -1,8 +1,8 @@
 {
 	"name": "@surveyplanet/utilities",
 	"version": "0.0.1-alpha.2",
+	"type": "module",
 	"main": "./dist/index.js",
-	"module": "./dist/index.js",
 	"types": "./dist/src/index.d.ts",
 	"license": "MIT",
 	"homepage": "https://github.com/surveyplanet/utilities",
@@ -15,11 +15,11 @@
 		"npm": ">= 8"
 	},
 	"files": [
-		"dist/**/*"
+		"dist"
 	],
 	"scripts": {
 		"build": "npm run clean && npm run type:dts && npm run build:main",
-		"build:main": "node --require ./esbuild-hook ./bin/build",
+		"build:main": "./bin/build.js",
 		"clean": "rm -rf dist coverage .nyc_output",
 		"type:dts": "tsc --emitDeclarationOnly",
 		"type:check": "tsc --noEmit",
@@ -62,7 +62,6 @@
 		"nyc": "^15.1.0",
 		"prettier": "^2.8.3",
 		"semantic-release": "^20.1.0",
-		"source-map-support": "^0.5.21",
 		"typescript": "^4.9.4",
 		"vitest": "^0.28.3"
 	},

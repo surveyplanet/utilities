@@ -1,8 +1,13 @@
-import path from 'path';
-import { copyFile } from 'fs/promises';
-import { build as esbuild, type BuildOptions } from 'esbuild';
+#! /usr/bin/env node
 
-const baseConfig: BuildOptions = {
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { copyFile } from 'fs/promises';
+import { build as esbuild } from 'esbuild';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const baseConfig = {
 	platform: 'node',
 	target: 'esnext',
 	format: 'esm',
@@ -12,7 +17,7 @@ const baseConfig: BuildOptions = {
 	bundle: true,
 };
 
-async function main() {
+(async function () {
 	await copyFile(
 		path.join(__dirname, '../package.json'),
 		path.join(__dirname, '../dist/package.json')
@@ -30,8 +35,11 @@ async function main() {
 		outdir: path.join(__dirname, '../dist'),
 		entryPoints: [path.join(__dirname, '../src/index.ts')],
 	});
-}
-
-if (require.main === module) {
-	main();
-}
+})()
+	.then(() => {
+		console.log('Build complete');
+	})
+	.catch((err) => {
+		console.error(err);
+		process.exit(1);
+	});
