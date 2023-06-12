@@ -1,9 +1,9 @@
 {
 	"name": "@surveyplanet/utilities",
 	"version": "0.0.1-alpha.2",
-	"main": "./build/cjs/index.js",
-	"module": "./build/esm/index.js",
-	"types": "./build/src/index.d.ts",
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/src/index.d.ts",
 	"license": "MIT",
 	"homepage": "https://github.com/surveyplanet/utilities",
 	"repository": {
@@ -14,10 +14,13 @@
 		"node": ">= 16",
 		"npm": ">= 8"
 	},
+	"files": [
+		"dist/**/*"
+	],
 	"scripts": {
 		"build": "npm run clean && npm run type:dts && npm run build:main",
-		"build:main": "node -r ./esbuild-hook ./scripts/build",
-		"clean": "rm -rf build coverage .nyc_output",
+		"build:main": "node --require ./esbuild-hook ./bin/build",
+		"clean": "rm -rf dist coverage .nyc_output",
 		"type:dts": "tsc --emitDeclarationOnly",
 		"type:check": "tsc --noEmit",
 		"format": "prettier \"src/**/*.ts\" --write",

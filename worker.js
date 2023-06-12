@@ -1,1 +1,0 @@
-postMessage("Worker test!!");self.postMessage("Worker test!!");
