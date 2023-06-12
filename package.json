@@ -14,9 +14,6 @@
 		"node": ">= 16",
 		"npm": ">= 8"
 	},
-	"publishConfig": {
-		"access": "public"
-	},
 	"scripts": {
 		"build": "npm run clean && npm run type:dts && npm run build:main",
 		"build:main": "node -r ./esbuild-hook ./scripts/build",
@@ -32,7 +29,8 @@
 		"test:coverage": "vitest run --coverage",
 		"test:setup": "node -r ./esbuild-hook ./scripts/testSetup",
 		"spell": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
-		"release": "semantic-release"
+		"release": "semantic-release",
+		"release:dry": "semantic-release --dry-run"
 	},
 	"devDependencies": {
 		"@ryansonshine/commitizen": "^4.2.8",
