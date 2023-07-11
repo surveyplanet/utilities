@@ -5,7 +5,6 @@ export { default as inWorker } from './in_worker';
 export {
 	default as transformImage,
 	type TransformOptions,
-	type MediaUrl,
 } from './transform_image';
 export {
 	default as validate,

@@ -18,8 +18,6 @@ export interface TransformOptions {
 	width?: number;
 }
 
-export type MediaUrl = string & { __brand: 'MediaUrl' };
-
 const SHORTCUTS: Record<keyof TransformOptions, string> = {
 	background: 'bg',
 	blur: 'b',
@@ -40,17 +38,13 @@ const SHORTCUTS: Record<keyof TransformOptions, string> = {
 	width: 'w',
 };
 
-const ROOT_URL = 'https://media.surveyplanet.com' as MediaUrl;
-
-function isMediaUrl(url: string): url is MediaUrl {
-	return url.length > 0 && url.startsWith(ROOT_URL);
-}
+const ROOT_URL = 'https://media.surveyplanet.com';
 
 /**
  * Resize SurveyPlanet media server images
  *
  * @function transformImage
- * @param url {MediaUrl} - The url of the image to transform
+ * @param url {string} - The url of the image to transform
  * @param options {TransformOptions} - The image transform options
  * @param options.background {string} -	Adjusts the backfill color of an image that has been resized and scaled to fit the new dimensions, usually when resize is set to f_contain. Value should be in the form of hex string e.g.: bg_ff00ff.
  * @param options.blur {number} -	Blur the image.
@@ -75,10 +69,10 @@ function isMediaUrl(url: string): url is MediaUrl {
  * @param options.tint {string} -	Adjust the tint or coloring of your image. For example, setting a value of 255:0:0 will yield an image with only red channels and no greens/blues.
  * @param options.width {number} -	Change the width of the image.
  * @async
- * @returns MediaUrl
+ * @returns string
  */
-export default (url: MediaUrl, options: TransformOptions = {}): MediaUrl => {
-	if (!isMediaUrl(url)) {
+export default (url: string, options: TransformOptions = {}): string => {
+	if (url.length <= 0 || !url.startsWith(ROOT_URL)) {
 		return url;
 	}
 
@@ -92,16 +86,15 @@ export default (url: MediaUrl, options: TransformOptions = {}): MediaUrl => {
 			const prop = SHORTCUTS[key as keyof TransformOptions];
 			const val = options[key as keyof TransformOptions] ?? '';
 
-			return val && typeof val === 'boolean'
-				? prop
-				: `${prop}_${val.toString()}`;
+			if (typeof val === 'boolean') {
+				return prop;
+			}
+
+			return `${prop}_${val.toString()}`;
 		})
 		.join(',');
 
-	url = url.replace(
-		ROOT_URL + '/',
-		`${ROOT_URL}/${transformations}/`
-	) as MediaUrl;
+	url = url.replace(ROOT_URL + '/', `${ROOT_URL}/${transformations}/`);
 
 	return url;
 };

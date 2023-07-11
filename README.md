@@ -128,18 +128,14 @@ Transform or resize any image stored on the SurveyPlanet media server.
 #### Example
 
 ```ts
-import {
-	transformImage,
-	type TransformOptions,
-	type MediaUrl,
-} from '@surveyplanet/utilities';
+import { transformImage, type TransformOptions } from '@surveyplanet/utilities';
 const options: TransformOptions = {
 	fit: 'contain',
 	height: 500,
 	width: 500,
 };
 
-const url: MediaUrl = transformImage(
+const url = transformImage(
 	'https://media.surveyplanet.com/testing/default.jpeg',
 	options
 );
@@ -148,31 +144,36 @@ console.log(url); //'https://media.surveyplanet.com/f_contain,h_500,w_500/testin
 
 #### Properties
 
+| Property  | Type             | Description                         |
+| --------- | ---------------- | ----------------------------------- |
+| `ulr`     | string           | The image url to transform.         |
+| `options` | TransformOptions | Transformation options (see below). |
+
+##### Transformation Options
+
 The following area list of possible transformations
 
-| Property     | Short | Type    | Description                                                                                                                                                                                                |
-| ------------ | ----- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `background` | `bg`  | String  | Adjusts the backfill color of an image that has been resized and scaled to fit the new dimensions, usually when resize is set to `f_contain`. Value should be in the form of hex string e.g.: `bg_ff00ff`. |
-| `blur`       | `b`   | Number  | Blur the image.                                                                                                                                                                                            |
-| **`fit`**    | `f`   | String  | The possible methods by which the image should fit width and height. Both `width` and `height` must be present. See [fit details](#fit) below.                                                             |
-| `flatten`    | `fl`  | String  | Merge alpha transparency channel, if any, with a background, then remove the alpha channel. Value should be in the form of hex string e.g.: `fl_ff00ff`.                                                   |
-| `flip`       | `fi`  | Boolean | Flip the image about the vertical on the Y axis.                                                                                                                                                           |
-| `flop`       | `fo`  | Boolean | Flop the image horizontally on the X axis.                                                                                                                                                                 |
-| `gamma`      | `ga`  | Number  | Apply a gamma correction by reducing the encoding (darken) pre-resize at a factor of 1/gamma then increasing the encoding (brighten) post-resize at a factor of gamma.                                     |
-| `grayscale`  | `g`   | Boolean | Change the image to grayscale.                                                                                                                                                                             |
-| **`height`** | `h`   | Number  | Change the height of the image                                                                                                                                                                             |
-| `median`     | `m`   | Number  | Apply median filter.                                                                                                                                                                                       |
-| `negate`     | `n`   | Boolean | Create a 'negative' by inverting the colors of the image.                                                                                                                                                  |
-| `normalize`  | `no`  | Boolean | Enhance output image contrast by stretching its luminance to cover the full dynamic range.                                                                                                                 |
-| `rotate`     | `ro`  | Number  | Rotate the output image by either an explicit angle or auto-orient based on the EXIF Orientation tag.                                                                                                      |
-| `sharpen`    | `s`   | Number  | Sharpen the image.                                                                                                                                                                                         |
-| `threshold`  | `th`  | Number  | Any pixel value greater than or equal to the threshold value will be set to 255, otherwise it will be set to 0.                                                                                            |
-| `tint`       | `t`   | String  | Adjust the tint or coloring of your image. For example, setting a value of `255:0:0` will yield an image with only red channels and no greens/blues.                                                       |
-| **`width`**  | `w`   | Number  | Change the width of the image.                                                                                                                                                                             |
+| Property     | Type                                                    | Description                                                                                                                                                                                                |
+| ------------ | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `background` | string                                                  | Adjusts the backfill color of an image that has been resized and scaled to fit the new dimensions, usually when resize is set to `f_contain`. Value should be in the form of hex string e.g.: `bg_ff00ff`. |
+| `blur`       | number                                                  | Blur the image.                                                                                                                                                                                            |
+| **`fit`**    | `cover` \| `contain` \| `fill` \| `inside` \| `outside` | The possible methods by which the image should fit width and height. Both `width` and `height` must be present. See [fit details](#fit) below.                                                             |
+| `flatten`    | string                                                  | Merge alpha transparency channel, if any, with a background, then remove the alpha channel. Value should be in the form of hex string e.g.: `fl_ff00ff`.                                                   |
+| `flip`       | boolean                                                 | Flip the image about the vertical on the Y axis.                                                                                                                                                           |
+| `flop`       | boolean                                                 | Flop the image horizontally on the X axis.                                                                                                                                                                 |
+| `gamma`      | number                                                  | Apply a gamma correction by reducing the encoding (darken) pre-resize at a factor of 1/gamma then increasing the encoding (brighten) post-resize at a factor of gamma.                                     |
+| `grayscale`  | boolean                                                 | Change the image to grayscale.                                                                                                                                                                             |
+| **`height`** | number                                                  | Change the height of the image                                                                                                                                                                             |
+| `median`     | number                                                  | Apply median filter.                                                                                                                                                                                       |
+| `negate`     | boolean                                                 | Create a 'negative' by inverting the colors of the image.                                                                                                                                                  |
+| `normalize`  | boolean                                                 | Enhance output image contrast by stretching its luminance to cover the full dynamic range.                                                                                                                 |
+| `rotate`     | number                                                  | Rotate the output image by either an explicit angle or auto-orient based on the EXIF Orientation tag.                                                                                                      |
+| `sharpen`    | number                                                  | Sharpen the image.                                                                                                                                                                                         |
+| `threshold`  | number                                                  | Any pixel value greater than or equal to the threshold value will be set to 255, otherwise it will be set to 0.                                                                                            |
+| `tint`       | string                                                  | Adjust the tint or coloring of your image. For example, setting a value of `255:0:0` will yield an image with only red channels and no greens/blues.                                                       |
+| **`width`**  | number                                                  | Change the width of the image.                                                                                                                                                                             |
 
-_\*_ An array of numbers separated by colon e.g.: `225:0:0`
-
-#### Fit
+###### Fit types
 
 -   `cover`: (default) Preserving aspect ratio, ensure the image covers both provided dimensions by cropping/clipping to fit.
 -   `contain`: Preserving aspect ratio, contain within both provided dimensions using "letterboxing" where necessary.
