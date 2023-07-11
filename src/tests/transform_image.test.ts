@@ -11,7 +11,6 @@ describe('transform_image', function () {
 		const height = 150;
 		const width = 150;
 		const options: TransformOptions = { fit, height, width };
-
 		const url: MediaUrl = transformImage(TEST_IMG, options);
 		expect(url).toBe(
 			`${ROOT_URL}/f_${fit},h_${height},w_${width}/testing/default.jpeg`
@@ -21,7 +20,6 @@ describe('transform_image', function () {
 	it('should change the image background', function () {
 		const value = '00FF00';
 		const options: TransformOptions = { background: value };
-
 		const url: MediaUrl = transformImage(TEST_IMG, options);
 		expect(url).toBe(`${ROOT_URL}/bg_${value}/testing/default.jpeg`);
 	});

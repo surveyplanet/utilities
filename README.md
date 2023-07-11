@@ -123,19 +123,27 @@ Validate form inputs
 
 ### Transform image
 
+Transform or resize any image stored on the SurveyPlanet media server.
+
 #### Example
 
 ```ts
-import { transformImage } from '@surveyplanet/utilities';
-const fit = 'contain';
-const height = 150;
-const width = 150;
-const options: TransformOptions = { fit, height, width };
+import {
+	transformImage,
+	type TransformOptions,
+	type MediaUrl,
+} from '@surveyplanet/utilities';
+const options: TransformOptions = {
+	fit: 'contain',
+	height: 500,
+	width: 500,
+};
 
-const url: MediaUrl = transformImage(TEST_IMG, options);
-expect(url).toBe(
-	`${ROOT_URL}/f_${fit},h_${height},w_${width}/testing/default.jpeg`
+const url: MediaUrl = transformImage(
+	'https://media.surveyplanet.com/testing/default.jpeg',
+	options
 );
+console.log(url); //'https://media.surveyplanet.com/f_contain,h_500,w_500/testing/default.jpeg'
 ```
 
 #### Properties
