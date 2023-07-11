@@ -3,12 +3,17 @@ export { default as dasherize } from './dasherize';
 export { default as inBrowser } from './in_browser';
 export { default as inWorker } from './in_worker';
 export {
+	default as transformImage,
+	type TransformOptions,
+	type MediaUrl,
+} from './transform_image';
+export {
 	default as validate,
 	validateAll,
 	renderValidationError,
 	removeAllValidationErrors,
-	ValidatorError,
-	ValidatorRule,
-	InputCollection,
-	FormInput,
+	type ValidatorError,
+	type ValidatorRule,
+	type InputCollection,
+	type FormInput,
 } from './validate';

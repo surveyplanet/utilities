@@ -30,7 +30,6 @@
 		"test": "vitest run",
 		"test:watch": "vitest watch",
 		"test:coverage": "vitest run --coverage",
-		"test:setup": "node -r ./esbuild-hook ./scripts/testSetup",
 		"spell": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
 		"release": "semantic-release",
 		"release:dry": "semantic-release --dry-run"
