@@ -33,6 +33,14 @@ describe('transform_image', function () {
 			'webp',
 			'apng',
 			'avif',
+			'PNG',
+			'JPG',
+			'JPEG',
+			'GIF',
+			'SVG',
+			'WEBP',
+			'APNG',
+			'AVIF',
 		];
 		for (const ext of exts) {
 			const img = `${TEST_IMG}.${ext}`;

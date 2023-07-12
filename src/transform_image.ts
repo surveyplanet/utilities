@@ -86,7 +86,7 @@ export default (
 	}
 
 	if (format) {
-		if (/\.(?:jpe?g|webp|gif|a?png|svg|avif)$/.test(url)) {
+		if (/\.(?:jpe?g|webp|gif|a?png|svg|avif)$/i.test(url)) {
 			console.warn(
 				`Cannot change format of legacy images with extension in file name: ${url}.`
 			);
