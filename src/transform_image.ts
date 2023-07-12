@@ -71,13 +71,28 @@ const ROOT_URL = 'https://media.surveyplanet.com';
  * @async
  * @returns string
  */
-export default (url: string, options: TransformOptions = {}): string => {
+export default (
+	url: string,
+	options: TransformOptions = {},
+	format?: 'png' | 'jpg' | 'jpeg' | 'gif'
+): string => {
+	// console.log('transformImage', url, options, format);
 	if (url.length <= 0 || !url.startsWith(ROOT_URL)) {
 		return url;
 	}
 
-	if (Object.entries(options).length === 0) {
+	if (Object.entries(options).length === 0 && !format) {
 		return url;
+	}
+
+	if (format) {
+		if (/\.(?:jpe?g|webp|gif|a?png|svg|avif)$/.test(url)) {
+			console.warn(
+				`transformImage() cannot change format of legacy images with extension in file name: ${url}.`
+			);
+		} else {
+			url = `${url}.${format}`;
+		}
 	}
 
 	const transformations: string = Object.keys(options)
@@ -94,7 +109,9 @@ export default (url: string, options: TransformOptions = {}): string => {
 		})
 		.join(',');
 
-	url = url.replace(ROOT_URL + '/', `${ROOT_URL}/${transformations}/`);
+	if (transformations.length > 0) {
+		url = url.replace(ROOT_URL + '/', `${ROOT_URL}/${transformations}/`);
+	}
 
 	return url;
 };
