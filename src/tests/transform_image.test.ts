@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { transformImage, type TransformOptions } from '../index';
 
-const TEST_IMG = 'https://media.surveyplanet.com/testing/default';
 const ROOT_URL = 'https://media.surveyplanet.com';
+const TEST_IMG = `${ROOT_URL}/testing/default`;
 
 describe('transform_image', function () {
 	it('should return url without transformation since it is not on media server', function () {
@@ -24,6 +24,7 @@ describe('transform_image', function () {
 	});
 
 	it.skip('should not change the image format since the image already has a file extension', function () {
+		// This outputs a bunch of warnings in the console so just skip it, it's not that important.
 		const exts = [
 			'png',
 			'jpg',
