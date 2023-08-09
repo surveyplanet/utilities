@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import { inWorker } from '../index';
 
-describe('inBrowser', () => {
+describe('inWorker', () => {
 	it('should confirm test is not in a web worker', () => {
 		expect(inWorker).toBe(false);
 	});
