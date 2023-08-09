@@ -1,3 +1,10 @@
+/**
+ * Converts a string to dasherize case.
+ *
+ * @function dasherize
+ * @see https://stackoverflow.com/questions/16427636/check-if-localstorage-is-available
+ * @returns {boolean}
+ */
 export default (str: string, delimiter: '-' | '_' = '-'): string => {
 	str = str
 		.trim()
