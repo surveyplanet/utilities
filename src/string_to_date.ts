@@ -1,13 +1,12 @@
 /**
  * Description.....
  *
+ * time: 11:35
+ * date: 1977-04-29
+ * datetime-local: 1977-03-29T06:00:00
  * @name stringToDate
  * @returns {Date}
  */
-
-// time: 11:35
-// date: 1977-04-29
-// datetime-local: 1977-03-29T06:00:00
 
 const stringToDate = (type: InputType, isoStr: string): Date | undefined => {
 	console.log('stringToDate', isoStr);
