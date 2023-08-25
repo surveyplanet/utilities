@@ -1,4 +1,3 @@
-import { type ISODate, ensureISODate } from '@surveyplanet/types';
 import { test, expect, describe } from 'vitest';
 import dateToString from '../date_to_string';
 
@@ -10,8 +9,8 @@ describe('dateToString', () => {
 		expect(dateToString('time', ['1977-04-12T11:21Z'])).toBe('11:21:00');
 		expect(dateToString('date', ['1977-04-12T11:21Z'])).toBe('1977-04-12');
 
-		// expect(dateToString('datetime-local', '')).toBe('');
-		// expect(dateToString('time', '')).toBe('');
-		// expect(dateToString('date', '')).toBe('');
+		expect(dateToString('datetime-local', [''])).toBe('');
+		expect(dateToString('time', [''])).toBe('');
+		expect(dateToString('date', [''])).toBe('');
 	});
 });
