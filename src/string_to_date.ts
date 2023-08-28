@@ -19,8 +19,6 @@ import InputType from './types/DateTimeInputType';
 
 let result: Date;
 const stringToDate = (type: InputType, isoStr: string): Date | undefined => {
-	console.log('stringToDate', isoStr);
-
 	if (!isoStr.length) {
 		return;
 	}
@@ -34,8 +32,8 @@ const stringToDate = (type: InputType, isoStr: string): Date | undefined => {
 		if (isNaN(hr) || isNaN(min)) {
 			return undefined;
 		}
-		// if it's time question then set the date to 0,0,0 for date and 0 for miliseconds
-		result = new Date(Date.UTC(0, 0, 1, hr, min, 0)); // Use Date.UTC to ensure UTC
+		// if it's time question then set the date to 0,0,0 for date and 0 for milliseconds
+		result = new Date(Date.UTC(0, 0, 0, hr, min, 0)); // Use Date.UTC to ensure UTC
 	} else if (type === 'date') {
 		const [year, month, day] = isoStr.split('-').map(Number);
 		result = new Date(Date.UTC(year, month - 1, day));
