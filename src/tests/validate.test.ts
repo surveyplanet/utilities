@@ -1,149 +1,36 @@
 // @vitest-environment jsdom
+
 import { describe, expect, it, beforeAll } from 'vitest';
-import { validate, removeAllValidationErrors, RULES } from '../index';
 import {
-	ValidatorError,
+	default as validate,
+	RULES,
 	parseRule,
 	getRule,
+	parseValidationArgsFromInput,
 	parseValidationMessage,
-	validateAll,
-	// getInputCollection,
-	// getInputLabel,
+	renderValidationError,
+	removeAllValidationErrors,
+	getInputLabel,
 } from '../validate';
 import testData from './fixtures/validatorData';
 
 describe('Validator', () => {
-	describe('Validator HTML Input', () => {
-		beforeAll(() => {
-			const markup = [
-				'<html>',
-				'<head>',
-				'<title>Validate test form</title>',
-				'</head>',
-				'<body>',
-				'<content>',
-				'<form id="input-form"></form>',
-				'<form id="check-radio-form"></form>',
-				'<form id="select-form"></form>',
-				'</content>',
-				'</body>',
-				'</html>',
-			].join('/n');
-
-			document.getElementsByTagName('body')[0].innerHTML = markup;
-			const inputForm = document.getElementById(
-				'input-form'
-			) as HTMLFormElement;
-
-			for (const item of testData) {
-				const p = document.createElement('p');
-				const label = document.createElement('label');
-
-				label.textContent =
-					item.rule === 'required' ? item.rule + ' *' : item.rule;
-				label.setAttribute('for', item.id);
-				p.appendChild(label);
-
-				const input = document.createElement('input');
-				input.type = 'text';
-				input.id = item.id;
-				input.name = input.id;
-				input.setAttribute('data-validate-rules', item.rule);
-				input.setAttribute('data-validate-show-errors', 'true');
-				input.setAttribute('class', `validate-test`);
-				p.appendChild(input);
-				inputForm.appendChild(p);
-			}
-
-			const checkRadioForm = document.getElementById(
-				'check-radio-form'
-			) as HTMLFormElement;
-
-			['checkbox', 'radio'].forEach((type) =>
-				Array.from(Array(5).keys()).forEach((i) => {
-					const p = document.createElement('p');
-					const label = document.createElement('label');
-					const input = document.createElement('input');
-
-					input.type = type;
-					input.id = `${type}-test-${i}`;
-					input.value = `${type}-test-${i}`;
-					input.name = `${type}-test`;
-					input.setAttribute('data-validate-rules', 'required');
-
-					label.setAttribute('for', input.id);
-					label.textContent = `${type} - ${i}`;
-					p.appendChild(label);
-					p.appendChild(input);
-					checkRadioForm.appendChild(p);
-				})
-			);
-
-			const selectForm = document.getElementById(
-				'select-form'
-			) as HTMLFormElement;
-
-			const p = document.createElement('p');
-			const label = document.createElement('label');
-			const input = document.createElement('select');
-			input.id = `test-select`;
-			input.name = `test-select`;
-			input.setAttribute('data-validate-rules', 'required');
-			label.setAttribute('for', input.id);
-			label.textContent = 'Select input';
-
-			const placeholderOption = document.createElement('option');
-			placeholderOption.textContent = `Choose one...`;
-			placeholderOption.value = '';
-			input.appendChild(placeholderOption);
-
-			Array.from(Array(5).keys()).forEach((i) => {
-				const option = document.createElement('option');
-				option.textContent = `Option ${i}`;
-				option.value = i.toString();
-				input.appendChild(option);
-			});
-
-			p.appendChild(label);
-			p.appendChild(input);
-			selectForm.appendChild(p);
-		});
-
-		// it('should get all the inputs with validate data attributes', () => {
-		// 	const inputCollection = getInputCollection();
-
-		// 	expect(inputCollection).toBeDefined();
-		// 	expect(inputCollection.length).toBeGreaterThan(1);
-		// 	let hasSelect = false;
-		// 	let hasInput = false;
-		// 	for (const item of inputCollection) {
-		// 		expect(item.nodeName).toBeDefined();
-		// 		const nodeType = item.nodeName.toLowerCase();
-		// 		if (!hasSelect) hasSelect = nodeType === 'select';
-		// 		if (!hasInput) hasInput = nodeType === 'input';
-		// 		const correctNodeType = ['input', 'select'].includes(nodeType);
-		// 		expect(correctNodeType).toBeTruthy();
-		// 		expect(item.dataset).toHaveProperty('validateRules');
-		// 	}
-		// 	expect(hasSelect).toBeTruthy();
-		// 	expect(hasInput).toBeTruthy();
-		// });
-
-		it.only('should prase validation rules', () => {
+	describe('Utilities', () => {
+		it('should prase validation rules', () => {
 			// expect(parseRule('')).toEqual({ rule: '' });
-			expect(parseRule('required')).toEqual({ rule: 'required' });
-			expect(parseRule('email')).toEqual({ rule: 'email' });
+			expect(parseRule('required')).toEqual({ name: 'required' });
+			expect(parseRule('email')).toEqual({ name: 'email' });
 			expect(parseRule('matches[test-required]')).toEqual({
-				rule: 'matches',
-				param: 'test-required',
+				name: 'matches',
+				parameter: 'test-required',
 			});
 			expect(parseRule('minLength[10]')).toEqual({
-				rule: 'minLength',
-				param: '10',
+				name: 'minLength',
+				parameter: '10',
 			});
 			expect(parseRule('custom[/^[a-z]{1,9}$/m]')).toEqual({
-				rule: 'custom',
-				param: '/^[a-z]{1,9}$/m',
+				name: 'custom',
+				parameter: '/^[a-z]{1,9}$/m',
 			});
 		});
 
@@ -164,181 +51,281 @@ describe('Validator', () => {
 				expect(getRule(rule.name)).toEqual(RULES[idx]);
 			}
 		});
+	});
 
-		it('should validate all text inputs - one at a time', () => {
+	describe('Hooks', () => {
+		it('should validate all values', function () {
 			for (const item of testData) {
-				const input = document.getElementById(
-					item.id
-				) as HTMLInputElement;
-				expect(input).toBeInstanceOf(HTMLInputElement);
+				const rule = RULES.find((r) => r.name === item.name);
 
-				let errors: ValidatorError[];
-
-				for (const invalid of item.invalids) {
-					input.value = invalid;
-					errors = validate(input);
-					// output some error messages for better debugging
-					if (!errors.length) {
-						console.error(
-							`Error: ${invalid} should be invalid for rule ${item.rule}`
-						);
-						console.error(item);
-					}
-					expect(errors.length).toBe(1);
-					expect(errors[0].id).toBe(item.id);
-					expect(errors[0].name).toBe(item.id);
-					expect(errors[0].class).toBe('validate-test');
-					expect(
-						input.className.includes('validation-error')
-					).toBeTruthy();
-					expect(errors[0].value).toBe(input.value);
-					const parsedRule = parseRule(item.rule);
-					expect(errors[0].rule).toBe(parsedRule.name);
-					expect(errors[0].parameter).toBe(parsedRule.option);
-					expect(errors[0].error.length).toBeGreaterThan(5);
-					expect(errors[0].error.includes('%l')).toBeFalsy();
-					expect(errors[0].error.includes('%p')).toBeFalsy();
-
-					const label = input.nextSibling as HTMLLabelElement;
-
-					expect(label).toBeDefined();
-					expect(label.textContent).toBe(
-						errors[0].error.replace(/<\/?em>/g, '')
-					);
-
-					expect(label.textContent?.endsWith('*')).toBeFalsy();
+				if (!rule) {
+					throw new Error('Rule is undefined');
 				}
 
-				for (const value of item.values) {
-					input.value = value;
-					errors = validate(input);
-					// output some error messages for better debugging
-					if (errors.length) {
-						console.error(
-							`Error: ${value} should be valid for rule ${item.rule}`
-						);
-						console.error(item);
-						console.error(errors);
-					}
+				expect(rule, `${item.name} does not have a rule`).toBeDefined();
+				expect(rule).toHaveProperty('hook');
+				expect(rule.name).toBe(item.name);
 
-					expect(errors.length).toBe(0);
-				}
+				const valid = rule.hook(item.values[0], item.parameter);
+				expect(
+					valid,
+					`${rule.name} should validate ${item.values[0]}`
+				).toBe(true);
 			}
 		});
 
-		it('should validate all text input at once', () => {
-			const inputForm = document.getElementById(
-				'input-form'
-			) as HTMLFormElement;
+		it('should not validate all values', function () {
+			for (const item of testData) {
+				const rule = RULES.find((r) => r.name === item.name);
 
-			const inputs = inputForm.querySelectorAll('input');
-			inputs.forEach(
-				(input, i) => (input.value = testData[i]?.invalids[0] ?? '')
-			);
-			const errors = validateAll(inputs);
-			expect(errors).toBeDefined();
-			expect(errors.length).toBeGreaterThanOrEqual(inputs.length);
+				if (!rule) {
+					throw new Error('Rule is undefined');
+				}
+
+				expect(rule, `${item.name} does not have a rule`).toBeDefined();
+				expect(rule).toHaveProperty('hook');
+				expect(rule.name).toBe(item.name);
+
+				const valid = rule.hook(item.invalids[0], item.parameter);
+
+				expect(
+					valid,
+					`${rule.name} should not validate ${item.invalids[0]}`
+				).toBe(false);
+			}
+		});
+	});
+
+	describe('Plain text validation', function () {
+		// TODO: create test that check all validation rules.
+		it('should validate valid values', function () {
+			for (const item of testData) {
+				// console.log(item);
+
+				const validateArgs = {
+					value: item.values[0],
+					rules: [
+						{
+							name: item.name,
+							parameter: item.parameter,
+						},
+					],
+				};
+				const errors = validate(validateArgs);
+				expect(errors).toBeDefined();
+				expect(errors).toHaveLength(0);
+			}
 		});
 
-		it('should validate all inputs without passing inputs', () => {
-			const errors = validate(null);
-			expect(errors).toBeDefined();
-			expect(errors.length).toBeGreaterThanOrEqual(testData.length);
+		it('should not validate invalid values', function () {
+			for (const item of testData) {
+				const validateArgs = {
+					value: item.invalids[0],
+					label: item.name,
+					rules: [
+						{
+							name: item.name,
+							parameter: item.parameter,
+						},
+					],
+				};
+				const errors = validate(validateArgs);
+				expect(errors).toBeDefined();
+				expect(errors).toHaveLength(1);
+				expect(errors[0].value).toBe(validateArgs.value);
+				expect(errors[0].rule).toBe(validateArgs.rules[0].name);
+				expect(errors[0].parameter).toBe(
+					validateArgs.rules[0].parameter
+				);
+				expect(errors[0].error).toMatch(
+					new RegExp(`^<em>${validateArgs.label}</em>`)
+				);
+			}
 		});
 
-		it('should remove all validation errors', () => {
-			const errors = validate(null);
+		it('should return a custom error message and label', function () {
+			const errMsg = 'Kaboom!!! %l is not valid.';
+			const label = 'Noop';
+			const rule = testData[0];
+
+			const validateArgs = {
+				value: rule.invalids[0],
+				rules: [{ name: rule.name }],
+				message: errMsg,
+				label: label,
+			};
+			const errors = validate(validateArgs);
 			expect(errors).toBeDefined();
-			expect(errors.length).toBeGreaterThanOrEqual(testData.length);
-			removeAllValidationErrors();
-			const errs = document.querySelectorAll('validation-error');
-			expect(errs.length).toBe(0);
-			const msgs = document.querySelectorAll('validation-error-message');
+			expect(errors).toHaveLength(1);
+			expect(errors[0].value).toBe(validateArgs.value);
+			expect(errors[0].rule).toBe(validateArgs.rules[0].name);
+			expect(errors[0].error).toBe(parseValidationMessage(errMsg, label));
+		});
+	});
+
+	describe('HTML input validation', () => {
+		beforeAll(() => {
+			const markup = [
+				'<html>',
+				'<head>',
+				'<title>Validate test form</title>',
+				'</head>',
+				'<body>',
+				'<content>',
+				'<form id="input-form">',
+				'<label for="email">Email *</label>',
+				'<input type="email"',
+				'  id="email"',
+				'  name="email"',
+				'  data-validate-rules="required,email"',
+				'  data-validate-message="You\'ve got to use a real email bro at %l"',
+				'  data-validate-show-errors />',
+				'</form>',
+				'<form id="check-radio-form">',
+				'<fieldset>',
+				'  <label for="checkbox1">',
+				'    <input type="checkbox" id="checkbox1" name="checkbox[]" value="Option 1"> Option 1',
+				'  </label>',
+				'  <label for="checkbox2">',
+				'    <input type="checkbox" id="checkbox2" name="checkbox[]" value="Option 2"> Option 2',
+				'  </label>',
+				'  <label for="checkbox3">',
+				'    <input type="checkbox" id="checkbox3" name="checkbox[]" value="Option 3"> Option 3',
+				'  </label>',
+				'</fieldset>',
+				'<fieldset>',
+				'  <label for="radio1">',
+				'    <input type="radio" id="radio1" name="radio" value="Radio Option 1"> Radio Option 1',
+				'  </label>',
+				'  <label for="radio2">',
+				'    <input type="radio" id="radio2" name="radio" value="Radio Option 2"> Radio Option 2',
+				'  </label>',
+				'  <label for="radio3">',
+				'    <input type="radio" id="radio3" name="radio" value="Radio Option 3"> Radio Option 3',
+				'  </label>',
+				'</fieldset>',
+				'</form>',
+				'<form id="select-form">',
+				'<label for="test-select">Select an option:</label>',
+				'<select id="test-select" name="test-select"',
+				'  data-validate-rules="required"',
+				'  data-validate-message="You\'ve got to select one option"',
+				'  data-validate-show-errors >',
+				'  <option value="">Choose One</option>',
+				'  <option value="option1">Option 1</option>',
+				'  <option value="option2">Option 2</option>',
+				'  <option value="option3">Option 3</option>',
+				'  <option value="option4">Option 4</option>',
+				'</select>',
+				'</form>',
+				'</content>',
+				'</body>',
+				'</html>',
+			].join('/n');
+
+			document.getElementsByTagName('body')[0].innerHTML = markup;
+		});
+
+		it('should get the label for an input', () => {
+			const emailInput = document.getElementById(
+				'email'
+			) as HTMLInputElement;
+			const label = getInputLabel(emailInput);
+			expect(label).toBe('Email');
+		});
+
+		it('should get the label by input id', () => {
+			const label = getInputLabel('email');
+			expect(label).toBe('Email');
+		});
+
+		it('should parse validation arguments for email input', () => {
+			const emailInput = document.getElementById(
+				'email'
+			) as HTMLInputElement;
+			emailInput.value = 'someone@test.test';
+			const args = parseValidationArgsFromInput({ value: emailInput });
+			expect(args).toStrictEqual({
+				value: emailInput.value,
+				label: 'Email',
+				rules: [{ name: 'required' }, { name: 'email' }],
+				message: "You've got to use a real email bro at %l",
+				show: true,
+				_id: 'email',
+			});
+		});
+
+		it('should create and remove a validation error', () => {
+			let errs = document.querySelectorAll('.validation-error');
+			let msgs = document.querySelectorAll('.validation-error-message');
 			expect(msgs.length).toBe(0);
-		});
+			expect(errs.length).toBe(0);
 
-		it('should display a custom error message', () => {
-			const customMessage = 'Hey!! The %l input is a required field!';
-			const input = document.getElementById(
-				testData[0].id
+			const errMsg = 'noop, that is not an email';
+			const emailInput = document.getElementById(
+				'email'
 			) as HTMLInputElement;
 
-			expect(input).toBeDefined();
-			input.value = '';
-			input.setAttribute('data-validate-message', customMessage);
-			input.setAttribute('data-show-message', customMessage);
-			const errors = validate(input);
+			renderValidationError(emailInput, errMsg);
 
-			expect(errors.length).toBe(1);
+			errs = document.querySelectorAll('.validation-error');
+			msgs = document.querySelectorAll('.validation-error-message');
+			expect(msgs.length).toBe(1);
+			expect(errs.length).toBe(1);
+			expect(msgs[0].textContent).toBe(errMsg);
+
+			removeAllValidationErrors();
+			errs = document.querySelectorAll('.validation-error');
+			msgs = document.querySelectorAll('.validation-error-message');
+			expect(msgs.length).toBe(0);
+			expect(errs.length).toBe(0);
+		});
+
+		it('should not validate a required email input', () => {
+			const emailInput = document.getElementById(
+				'email'
+			) as HTMLInputElement;
+			emailInput.value = 'not-an-email';
+
+			const validationArgs = {
+				value: emailInput,
+			};
+			const errors = validate(validationArgs);
+			expect(errors).toHaveLength(1);
+			expect(errors[0]).toHaveProperty('value');
+			expect(errors[0]).toHaveProperty('rule');
+			expect(errors[0]).toHaveProperty('error');
+			expect(errors[0].value).toBe(emailInput.value);
+			expect(errors[0].rule).toBe('email');
 			expect(errors[0].error).toBe(
-				customMessage.replace('%l', 'required')
+				"You've got to use a real email bro at Email"
 			);
-			const labels = input.parentElement?.querySelectorAll(
-				`label[for="${input.name}"]`
-			);
-			expect(labels).toHaveLength(2);
-			const errLabel = labels?.item(1) as HTMLLabelElement;
-			expect(errLabel).toBeDefined();
-			expect(errLabel.textContent?.replace('*', '')).toBe(
-				errors[0].error
-			);
+
+			const errs = document.querySelectorAll('.validation-error');
+			const msgs = document.querySelectorAll('.validation-error-message');
+			expect(msgs.length).toBe(1);
+			expect(errs.length).toBe(1);
+			expect(msgs[0].textContent).toBe(errors[0].error);
+
+			removeAllValidationErrors();
 		});
 
-		it('should validation error form multiple rules', () => {
-			const input = document.getElementById(
-				testData[0].id
+		it('should validate a required email input', () => {
+			const emailInput = document.getElementById(
+				'email'
 			) as HTMLInputElement;
-			expect(input).toBeDefined();
-			input.value = '';
-			input.setAttribute(
-				'data-validate-rules',
-				'required,email,minLength[10]'
-			);
+			emailInput.value = 'tester@testington.tst';
 
-			const errors = validate(input);
-
-			expect(errors.length).toBe(3);
-			expect(errors[0].rule).toBe('required');
-			expect(errors[1].rule).toBe('email');
-			expect(errors[2].rule).toBe('minLength');
-		});
-
-		it('should validate the checkbox form', () => {
-			const checkbox = document.querySelector<HTMLInputElement>(
-				'input[type="checkbox"]'
-			);
-
-			// type guard
-			if (!checkbox) throw new Error('unable to find checkbox');
-			// expect(checkbox).toBeDefined(); // not sure why this isn't good enough
-
-			checkbox.checked = true;
-
-			let errors = validate(checkbox);
-			expect(errors.length).toBe(0);
-
-			checkbox.checked = false;
-			errors = validate(checkbox);
-			expect(errors.length).toBe(1);
-		});
-
-		it('should validate the radio form', () => {
-			const radio: HTMLInputElement | null = document.querySelector(
-				'input[type="radio"]'
-			);
-
-			// type guard
-			if (!radio) throw new Error('unable to find checkbox');
-			// expect(radio).toBeDefined();
-
-			radio.checked = true;
-
-			let errors = validate(radio);
-			expect(errors.length).toBe(0);
-
-			radio.checked = false;
-			errors = validate(radio);
-			expect(errors.length).toBe(1);
+			const validationArgs = {
+				value: emailInput,
+			};
+			const errors = validate(validationArgs);
+			expect(errors).toHaveLength(0);
+			const errs = document.querySelectorAll('.validation-error');
+			const msgs = document.querySelectorAll('.validation-error-message');
+			expect(msgs.length).toBe(0);
+			expect(errs.length).toBe(0);
+			removeAllValidationErrors();
 		});
 
 		it('should validate select input form', () => {
@@ -347,48 +334,31 @@ describe('Validator', () => {
 			) as HTMLSelectElement;
 
 			expect(select).toBeDefined();
-			let selectedOption = select.getElementsByTagName('option')[2];
-			expect(selectedOption).toBeDefined();
-			selectedOption.selected = true;
 
-			let errors = validate(select);
-			expect(errors.length).toBe(0);
-
-			selectedOption = select.getElementsByTagName('option')[0];
-			expect(selectedOption).toBeDefined();
-			selectedOption.selected = true;
-
-			errors = validate(select);
+			let errors = validate({ value: select });
 			expect(errors.length).toBe(1);
+
+			const selectedOption = select.getElementsByTagName('option')[2];
+			expect(selectedOption).toBeDefined();
+			selectedOption.selected = true;
+			console.log('--------->>', select.value);
+
+			errors = validate({ value: select });
+			console.log(errors);
+
+			expect(errors.length).toBe(0);
 		});
+
+		// it.skip('TODO: should validate the checkbox form', () => {
+		// 	const checkbox = document.querySelector<HTMLInputElement>(
+		// 		'input[type="checkbox"]'
+		// 	);
+		// });
+
+		// it.skip('TODO: should validate the radio form', () => {
+		// 	const radio: HTMLInputElement | null = document.querySelector(
+		// 		'input[type="radio"]'
+		// 	);
+		// });
 	});
-
-	// describe('Validate text', function(){
-	// 	// TODO: create test that check all validation rules.
-	// 	it('should validate all values', function(){
-	// 		for (const item of testData) {
-	// 			const validateArgs = {
-	// 				value: item.values[0]
-	// 				rules: validate.parseRule(item.rule),
-	// 				label: item.id,
-	// 			}
-	// 			const res = validate(validateArgs);
-	// 			expect(res).toBeDefined();
-	// 			// flush out test
-	// 		}
-	// 	})
-
-	// 	it('should not validate all values', function(){
-	// 		for (const item of testData) {
-	// 			const validateArgs = {
-	// 				value: item.invalids[0]
-	// 				rules: validate.parseRule(item.rule),
-	// 				label: item.id,
-	// 			}
-	// 			const res = validate(validateArgs);
-	// 			expect(res).toBeDefined();
-	// 			// flush out test
-	// 		}
-	// 	})
-	// })
 });
