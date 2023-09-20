@@ -1,23 +1,8 @@
-// In case we need to split ValidateArgs with different values
-// interface _ValidateArgs {
-//   value: string;
-//   rules?: {
-//     name: (typeof RULES)[number]['name'];
-//     parameter?: string | number;
-//   }[];
-//   label?: string;
-//   message?: string;
-// }
-
-// interface ValidateArgs extends Omit<_ValidateArgs, 'value'> {
-//   value: string | HTMLInputElement | CheckRadioInputElement;
-// }
-
 export type CheckRadioInputElement =
 	| (HTMLInputElement & { type: 'radio' })
 	| { type: 'checkbox' }; // Union type for radio and checkbox
 
-export type FormInput = HTMLInputElement | HTMLSelectElement; //| CheckRadioInputElement;
+export type FormControl = HTMLInputElement | HTMLSelectElement; //| CheckRadioInputElement;
 
 /**
  * Arguments for the validate function.
@@ -26,10 +11,9 @@ export type FormInput = HTMLInputElement | HTMLSelectElement; //| CheckRadioInpu
  * @param {string} label The label for the input element.
  * @param {string} message The validation error message.
  * @param {boolean} show Render the error message when value is an input type.
- *
  */
 export interface ValidateArgs {
-	value: string | FormInput;
+	value: string | FormControl;
 	rules?: ValidateArgsRule[];
 	label?: string;
 	message?: string;
@@ -37,7 +21,14 @@ export interface ValidateArgs {
 	_id?: string; // used internally to show and hide errors
 }
 
-interface ValidateArgsRule {
+/**
+ * The interface used to describe ValidateArg.rules
+ *
+ * @interface ValidatorError
+ * @param {string} name The rule name
+ * @param {string|number|undefined} parameter The parameter used for the rule, if any.
+ */
+export interface ValidateArgsRule {
 	name: (typeof RULES)[number]['name'];
 	parameter?: string | number;
 }
@@ -46,11 +37,11 @@ interface ValidateArgsRule {
  * The interface used to describe validation errors
  *
  * @interface ValidatorError
- * @member {string} value The value that was validated against the rule.
- * @member {string} rule The validation rule tha was violated.
- * @member {string} parameter? The parameter used for the rule, if any.
- * @member {string} error The validation error message.
- * @member {string} id The unique id of the input if error came from an html input element
+ * @param {string} value The value that was validated against the rule.
+ * @param {string} rule The validation rule tha was violated.
+ * @param {string} parameter? The parameter used for the rule, if any.
+ * @param {string} error The validation error message.
+ * @param {string} id The unique id of the input if error came from an html input element
  */
 export interface ValidatorError {
 	value: string;
@@ -64,12 +55,12 @@ export interface ValidatorError {
  * The interface used to describe the validation rules
  *
  * @interface ValidatorRule
- * @member name {string} The name of the rule.
- * @member message {string} The message that appears when a rule is violated.
- * @member description {string} The rule description.
- * @member example? {string} An example of a valid value
- * @member parameterRequired {boolean} Whether or not the rule requires any additional parameters
- * @member hook {(value: string, option?: string | number) => boolean} The function used to validate the input
+ * @param name {string} The name of the rule.
+ * @param message {string} The message that appears when a rule is violated.
+ * @param description {string} The rule description.
+ * @param example? {string} An example of a valid value
+ * @param parameterRequired {boolean} Whether or not the rule requires any additional parameters
+ * @param hook {(value: string, option?: string | number) => boolean} The function used to validate the input
  */
 export interface ValidatorRule {
 	name: string;
@@ -79,14 +70,6 @@ export interface ValidatorRule {
 	parameterRequired: boolean;
 	hook: (value: string, option?: string | number) => boolean;
 }
-
-/**
- * All the rule data for validator.
- *
- * @property RULES
- * @static
- * @type ValidatorRule[]
- */
 
 /**
  * A collection of regular expressions used for validation.
@@ -116,7 +99,6 @@ const REGEXP = {
 
 /**
  * A collection of validation rules used by validator.
- * TODO: Hooks should take a string not a value
  *
  * @property RULES
  * @static
@@ -601,12 +583,12 @@ export function parseValidationArgsFromInput(
 /**
  * Get the input's label text
  * @function getInputLabel
- * @param {FormInput | string} input The input or input id that errored.
+ * @param {FormControl | string} input The input or input id that errored.
  * @return {string}
  */
-export function getInputLabel(input: FormInput | string): string {
+export function getInputLabel(input: FormControl | string): string {
 	if (typeof input === 'string') {
-		input = document.getElementById(input) as FormInput;
+		input = document.getElementById(input) as FormControl;
 	}
 
 	const label = document.querySelector<HTMLLabelElement>(
@@ -635,18 +617,18 @@ export function getInputLabel(input: FormInput | string): string {
 /**
  * Add a validation error messages before or after an input.
  * @function renderValidationError
- * @param {FormInput} input The input that errored.
+ * @param {FormControl} input The input that errored.
  * @param {ValidatorError} error The validation error data.
  * @param {'before' | 'after'} position='after' Whether to place the error message before or after the input.
  * @return {void}
  */
 export function renderValidationError(
-	input: FormInput | string,
+	input: FormControl | string,
 	error: ValidatorError['error'],
 	position: 'before' | 'after' = 'after'
 ): void {
 	if (typeof input === 'string') {
-		input = document.getElementById(input) as FormInput;
+		input = document.getElementById(input) as FormControl;
 	}
 
 	input.classList.add('validation-error');
@@ -737,9 +719,9 @@ export function parseValidationMessage(
 
 /**
  * @function getInputCollection
- * @return {FormInput[]}
+ * @return {FormControl[]}
  */
-// export function getInputCollection(): FormInput[] {
+// export function getInputCollection(): FormControl[] {
 // 	const inputs: InputCollection = Array.from(
 // 		document.getElementsByTagName('input')
 // 	);
