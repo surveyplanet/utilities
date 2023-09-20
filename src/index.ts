@@ -16,7 +16,5 @@ export {
 	renderValidationError,
 	removeAllValidationErrors,
 	type ValidatorError,
-	type ValidatorRule,
-	type InputCollection,
-	type FormInput,
+	type ValidateArgs,
 } from './validate';
