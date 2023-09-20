@@ -434,14 +434,16 @@ export const RULES: ValidatorRule[] = [
 ];
 
 /**
- * Validate all inputs.
+ * Validate multiple values.
+ *
  * @function validateAll
+ * @param {ValidateArgs[]}
  * @return {ValidatorError[]}
  */
-export function validateAll(inputs: ValidateArgs[]): ValidatorError[] {
+export function validateAll(options: ValidateArgs[]): ValidatorError[] {
 	let errors: ValidatorError[] = [];
 
-	for (const input of inputs) {
+	for (const input of options) {
 		const err = validate(input);
 		if (err.length) {
 			errors = errors.concat(err);
@@ -454,15 +456,20 @@ export function validateAll(inputs: ValidateArgs[]): ValidatorError[] {
  * Utility for validating form inputs and displaying error messages.
  *
  * @function validate
- * @param {FormInput} input The input element to validate
- * @param {String} fields.id input id
+ * @param {ValidateArgs | ValidateArgs[]} options Validate options
  * @return {ValidatorError[]} A collection of validation errors.
+ * @example
+ * const options = {
+ *   value: 'bad-email-address'
+ *   rules: [{name:'required'}, {name:'email'}, {name:'minLength', parameter:4}]
+ * }
+ * const errors = validate( options );
  * @example
  * <script>
  * const inputEl = getElementById('email');
  * function submit () {
  *   const errors = validate( inputEl );
- *   if (!errors) { fetch(...) }
+ *   if (!errors.length) { fetch(...) }
  * }
  * </script>
  *
@@ -470,7 +477,7 @@ export function validateAll(inputs: ValidateArgs[]): ValidatorError[] {
  * <input type="email"
  *   id="email"
  *   name="email"
- *   data-validate-rules='require,email'
+ *   data-validate-rules="required,email,minLength[4]"
  *   data-validate-message="My custom validation message (or just use the default)"
  *   data-validate-show-errors />
  */
@@ -729,7 +736,6 @@ export function parseValidationMessage(
 }
 
 /**
- * Parse validation message with label and param.
  * @function getInputCollection
  * @return {FormInput[]}
  */

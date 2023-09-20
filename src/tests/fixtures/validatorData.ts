@@ -116,11 +116,12 @@ const testData = [
 		values: ['5558889999'],
 		invalids: ['invalid-phone'],
 	},
-	// {
-	// 	name: 'fileType',
-	// 	values: ['image.png'],
-	// 	invalids: ['invalid.png'],
-	// },
+	{
+		name: 'fileType',
+		values: ['image.png'],
+		invalids: ['invalid.xml'],
+		parameter: 'gif,png,jpg',
+	},
 	{
 		name: 'hasSpecialChar',
 		values: ['fo-x', 'fo!x', 'fox?', '"'],
@@ -141,10 +142,12 @@ const testData = [
 		values: ['HELLo'],
 		invalids: ['NO-LOWER'],
 	},
+	// TODO: fix custom rule
 	// This doesn't work all the time, particularly when there are no commas in the regular expression.
 	// Possible solution is to only allow one rule when using custom rule.
 	// {
-	// 	parameter: /[a-z]/,
+	// 	name: 'custom',
+	// 	parameter: '[a-z]',
 	// 	values: ['abcdefg'],
 	// 	invalids: ['ABC123'],
 	// },

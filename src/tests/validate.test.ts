@@ -3,6 +3,7 @@
 import { describe, expect, it, beforeAll } from 'vitest';
 import {
 	default as validate,
+	validateAll,
 	RULES,
 	parseRule,
 	getRule,
@@ -54,7 +55,7 @@ describe('Validator', () => {
 	});
 
 	describe('Hooks', () => {
-		it('should validate all values', function () {
+		it('should validate test data', function () {
 			for (const item of testData) {
 				const rule = RULES.find((r) => r.name === item.name);
 
@@ -74,7 +75,7 @@ describe('Validator', () => {
 			}
 		});
 
-		it('should not validate all values', function () {
+		it('should not validate test data', function () {
 			for (const item of testData) {
 				const rule = RULES.find((r) => r.name === item.name);
 
@@ -141,6 +142,42 @@ describe('Validator', () => {
 					new RegExp(`^<em>${validateArgs.label}</em>`)
 				);
 			}
+		});
+
+		it('should validate all', function () {
+			const options = testData.map((itm) => {
+				return {
+					value: itm.values[0],
+					rules: [
+						{
+							name: itm.name,
+							parameter: itm.parameter,
+						},
+					],
+					label: itm.name,
+				};
+			});
+			const errors = validateAll(options);
+			expect(errors).toBeDefined();
+			expect(errors).toHaveLength(0);
+		});
+
+		it('should not validate all', function () {
+			const options = testData.map((itm) => {
+				return {
+					value: itm.invalids[0],
+					rules: [
+						{
+							name: itm.name,
+							parameter: itm.parameter,
+						},
+					],
+					label: itm.name,
+				};
+			});
+			const errors = validateAll(options);
+			expect(errors).toBeDefined();
+			expect(errors).toHaveLength(options.length);
 		});
 
 		it('should return a custom error message and label', function () {
@@ -341,22 +378,19 @@ describe('Validator', () => {
 			const selectedOption = select.getElementsByTagName('option')[2];
 			expect(selectedOption).toBeDefined();
 			selectedOption.selected = true;
-			console.log('--------->>', select.value);
-
 			errors = validate({ value: select });
-			console.log(errors);
 
 			expect(errors.length).toBe(0);
 		});
 
 		// it.skip('TODO: should validate the checkbox form', () => {
-		// 	const checkbox = document.querySelector<HTMLInputElement>(
+		// 	const checkbox = document.querySelectorAll(
 		// 		'input[type="checkbox"]'
 		// 	);
 		// });
 
 		// it.skip('TODO: should validate the radio form', () => {
-		// 	const radio: HTMLInputElement | null = document.querySelector(
+		// 	const radio = document.querySelectorAll(
 		// 		'input[type="radio"]'
 		// 	);
 		// });
