@@ -2,13 +2,18 @@
 	"version": "0.2",
 	"language": "en",
 	"words": [
+		"apng",
+		"dasherize",
 		"degit",
 		"esbuild",
-		"utilities",
+		"EXIF",
+		"grayscale",
+		"letterboxing",
 		"octocat",
 		"rmrf",
 		"socio",
-		"surveyplanet"
+		"surveyplanet",
+		"utilities"
 	],
 	"flagWords": [],
 	"ignorePaths": [

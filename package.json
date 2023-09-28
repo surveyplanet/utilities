@@ -1,10 +1,10 @@
 {
 	"name": "@surveyplanet/utilities",
-	"version": "0.0.1-alpha.2",
-	"main": "./build/cjs/index.js",
-	"module": "./build/esm/index.js",
-	"types": "./build/src/index.d.ts",
-	"license": "MIT",
+	"version": "0.0.0",
+	"type": "module",
+	"main": "./dist/index.js",
+	"types": "./dist/src/index.d.ts",
+	"license": "UNLICENSED",
 	"homepage": "https://github.com/surveyplanet/utilities",
 	"repository": {
 		"type": "git",
@@ -14,13 +14,13 @@
 		"node": ">= 16",
 		"npm": ">= 8"
 	},
-	"publishConfig": {
-		"access": "public"
-	},
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "npm run clean && npm run type:dts && npm run build:main",
-		"build:main": "node -r ./esbuild-hook ./scripts/build",
-		"clean": "rm -rf build coverage .nyc_output",
+		"build:main": "./bin/build.js",
+		"clean": "rm -rf dist coverage .nyc_output",
 		"type:dts": "tsc --emitDeclarationOnly",
 		"type:check": "tsc --noEmit",
 		"format": "prettier \"src/**/*.ts\" --write",
@@ -30,10 +30,9 @@
 		"test": "vitest run",
 		"test:watch": "vitest watch",
 		"test:coverage": "vitest run --coverage",
-		"test:setup": "node -r ./esbuild-hook ./scripts/testSetup",
 		"spell": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
-		"publish": "publish",
-		"release": "semantic-release"
+		"release": "semantic-release",
+		"release:dry": "semantic-release --dry-run"
 	},
 	"devDependencies": {
 		"@ryansonshine/commitizen": "^4.2.8",
@@ -62,7 +61,6 @@
 		"nyc": "^15.1.0",
 		"prettier": "^2.8.3",
 		"semantic-release": "^20.1.0",
-		"source-map-support": "^0.5.21",
 		"typescript": "^4.9.4",
 		"vitest": "^0.28.3"
 	},

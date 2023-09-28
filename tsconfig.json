@@ -1,12 +1,12 @@
 {
 	"include": ["./src/**/*.ts"],
-	"exclude": ["./src/tests/**/*.ts"],
+	"exclude": ["./src/tests/**/*.ts", "./dist"],
 	"compilerOptions": {
 		"lib": ["es2020", "dom", "dom.iterable"],
 		"module": "commonjs",
 		"target": "es2020",
 		"rootDir": "./",
-		"outDir": "build",
+		"outDir": "dist",
 		"strict": true,
 		"sourceMap": true,
 		"esModuleInterop": true,
