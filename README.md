@@ -38,9 +38,21 @@ const someFunction = async (checked) => {
 
 ### Validate
 
-Validate form inputs
+Validate text and form form inputs
 
-#### Example
+#### Example 1
+
+```js
+
+const options = {
+  value: 'bad-email-address'
+  rules: [{name:'required'}, {name:'email'}, {name:'minLength', parameter:4}]
+}
+const errors = validate( options );
+
+```
+
+#### Example 2
 
 ```html
 <script>
