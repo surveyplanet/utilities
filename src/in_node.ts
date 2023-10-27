@@ -4,6 +4,4 @@
  * @name inNode
  * @returns {Boolean}
  */
-export default typeof process !== 'undefined' &&
-	process.versions != null &&
-	process.versions.node != null;
+export default typeof process.versions.node !== 'undefined';
