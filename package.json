@@ -18,21 +18,21 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "npm run clean && npm run type:dts && npm run build:main",
 		"build:main": "./bin/build.js",
+		"build": "npm run clean && npm run type:dts && npm run build:main",
 		"clean": "rm -rf dist coverage .nyc_output",
-		"type:dts": "tsc --emitDeclarationOnly",
-		"type:check": "tsc --noEmit",
-		"format": "prettier \"src/**/*.ts\" --write",
 		"format:check": "prettier \"src/**/*.ts\" --check",
-		"lint": "eslint src --ext .ts --fix",
+		"format": "prettier \"src/**/*.ts\" --write",
 		"lint:check": "eslint src --ext .ts",
-		"test": "vitest run",
-		"test:watch": "vitest watch",
-		"test:coverage": "vitest run --coverage",
-		"spell": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
+		"lint": "eslint src --ext .ts --fix",
+		"release:dry": "semantic-release --dry-run",
 		"release": "semantic-release",
-		"release:dry": "semantic-release --dry-run"
+		"spell": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
+		"test:coverage": "vitest run --coverage",
+		"test:watch": "vitest watch",
+		"test": "vitest run",
+		"type:check": "tsc --noEmit",
+		"type:dts": "tsc --emitDeclarationOnly"
 	},
 	"devDependencies": {
 		"@ryansonshine/commitizen": "^4.2.8",
