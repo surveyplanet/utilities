@@ -7,6 +7,8 @@ export { default as inBrowser } from './in_browser';
 export { default as inJsDom } from './in_jsdom';
 export { default as inNode } from './in_node';
 export { default as inWorker } from './in_worker';
+export { default as isDate } from './is_date';
+export { default as isPlainObject } from './is_plain_object';
 export {
 	default as transformImage,
 	type TransformOptions,
