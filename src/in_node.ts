@@ -1,5 +1,5 @@
 /**
- * Check if the code is running in Node.js
+ * Check if the code is running in Node.js using the `process` and Object.prototype.hasOwnProperty.call() method.
  *
  * @name inNode
  * @returns {Boolean}
