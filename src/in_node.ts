@@ -4,4 +4,6 @@
  * @name inNode
  * @returns {Boolean}
  */
-export default typeof process.versions.node !== 'undefined';
+export default typeof process !== 'undefined' &&
+	Object.prototype.hasOwnProperty.call(process, 'versions') &&
+	Object.prototype.hasOwnProperty.call(process.versions, 'node');
