@@ -17,8 +17,8 @@ describe('stringToDate', () => {
 	});
 	test('should return undefined if invalid datetime-local', () => {
 		expect(
-			stringToDate('datetime-local', '2023-05-29T06:00:00')?.toISOString()
-		).toBe('2023-05-29T06:00:00.000Z');
+			stringToDate('datetime-local', '2023-06-29T06:00:00')?.toISOString()
+		).toBe('2023-06-29T06:00:00.000Z');
 	});
 	test('should return correct date for leap year', () => {
 		expect(stringToDate('date', '2020-02-29')?.toISOString()).toBe(
