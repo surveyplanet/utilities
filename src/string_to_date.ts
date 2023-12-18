@@ -1,4 +1,3 @@
-import { type ISODate } from '@surveyplanet/types';
 import InputType from './types/DateTimeInputType';
 
 /**
