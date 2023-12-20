@@ -1,5 +1,5 @@
 import { test, expect, describe } from 'vitest';
-import dateToString from '../date_to_string';
+import { dateToString } from '../index';
 
 describe('dateToString', () => {
 	test('should return empty string if invalid date', () => {

@@ -1,5 +1,5 @@
 import { test, expect, describe } from 'vitest';
-import stringToDate from '../string_to_date';
+import { stringToDate } from '../index';
 
 describe('stringToDate', () => {
 	test('should return undefined if empty string', () => {
