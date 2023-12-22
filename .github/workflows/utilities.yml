@@ -22,10 +22,17 @@ jobs:
 
             - name: Install packages
               run: |
-                  npm install -D esbuild
+                  echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
                   npm ci --ignore-scripts
               env:
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            # - name: Install packages
+            #   # run: npm ci --ignore-scripts
+            #   run: |
+            #       npm install -D esbuild
+            #       npm ci --ignore-scripts
+            #   env:
+            #       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             - name: Security audit
               run: npm audit --audit-level=moderate --omit=dev

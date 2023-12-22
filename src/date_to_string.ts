@@ -3,6 +3,8 @@ import InputType from './types/date_time_input_type';
 
 /**
  * @name dateToString
+ * @param {InputType} type - 'datetime-local', 'date', or 'time'
+ * @param {DateTimeValue[]} response - ISO string from the date input
  * @returns {ISODate}
  */
 const dateToString = (
