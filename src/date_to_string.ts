@@ -1,31 +1,33 @@
-import { ISODate, ensureISODate, DateTimeValue } from '@surveyplanet/types';
-import InputType from './types/DateTimeInputType';
+import { DateTimeValue } from '@surveyplanet/types';
+import InputType from './types/date_time_input_type';
 
 /**
- * Description....
- *
  * @name dateToString
  * @returns {ISODate}
  */
 const dateToString = (
 	type: InputType,
 	response: DateTimeValue[]
-): string | '' => {
+): string | undefined => {
 	if (!response.length) {
-		return '';
+		return;
 	}
 
 	const dateVal = new Date(response[0]);
 
 	if (isNaN(dateVal.getTime())) {
-		return '';
-	} else if (type === 'datetime-local') {
-		return dateVal.toISOString().split('.')[0]; // datetime-local
-	} else if (type === 'time') {
+		return;
+	}
+
+	if (type === 'time') {
 		return dateVal.toISOString().split('T')[1].split('.')[0]; // time only
-	} else {
+	}
+
+	if (type === 'date') {
 		return dateVal.toISOString().split('T')[0]; // date only
 	}
+
+	return dateVal.toISOString().split('.')[0]; // datetime-local
 };
 
 export default dateToString;
