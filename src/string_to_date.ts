@@ -31,19 +31,17 @@ const stringToDate = (
 
 		return new Date(Date.UTC(0, 0, 0, hr, min));
 	}
-
+	// Date format only e.g.: 2020-01-01
 	if (type === 'date') {
 		const [year, month, day] = isoStr.split('-').map(Number);
 		return new Date(Date.UTC(year, month - 1, day));
 	}
 
-	// if (type === 'datetime-local') {
 	const [d, t] = isoStr.split('T');
 	const [year, month, day] = d.split('-').map(Number);
 	const [hr, min] = t.split(':').map(Number);
 
 	return new Date(Date.UTC(year, month - 1, day, hr, min));
-	// }
 };
 
 export default stringToDate;

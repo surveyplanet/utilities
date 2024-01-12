@@ -18,8 +18,8 @@ describe('dateToString', () => {
 		);
 	});
 	test('should return correct time', () => {
-		expect(dateToString('time', ['2000-04-27T13:02:00.000Z'])).toBe(
-			'13:02:00'
+		expect(dateToString('time', ['2000-04-27T13:02:01.000Z'])).toBe(
+			'13:02:01'
 		);
 	});
 });
