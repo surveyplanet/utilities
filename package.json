@@ -1,6 +1,6 @@
 {
 	"name": "@surveyplanet/utilities",
-	"version": "0.0.1-alpha.2",
+	"version": "0.0.0",
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/src/index.d.ts",
@@ -18,21 +18,21 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "npm run clean && npm run type:dts && npm run build:main",
 		"build:main": "./bin/build.js",
+		"build": "npm run clean && npm run type:dts && npm run build:main",
 		"clean": "rm -rf dist coverage .nyc_output",
-		"type:dts": "tsc --emitDeclarationOnly",
-		"type:check": "tsc --noEmit",
-		"format": "prettier \"src/**/*.ts\" --write",
 		"format:check": "prettier \"src/**/*.ts\" --check",
-		"lint": "eslint src --ext .ts --fix",
+		"format": "prettier \"src/**/*.ts\" --write",
 		"lint:check": "eslint src --ext .ts",
-		"test": "vitest run",
-		"test:watch": "vitest watch",
-		"test:coverage": "vitest run --coverage",
-		"spell": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
+		"lint": "eslint src --ext .ts --fix",
+		"release:dry": "semantic-release --dry-run",
 		"release": "semantic-release",
-		"release:dry": "semantic-release --dry-run"
+		"spell": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
+		"test:coverage": "vitest run --coverage",
+		"test:watch": "vitest watch",
+		"test": "vitest run",
+		"type:check": "tsc --noEmit",
+		"type:dts": "tsc --emitDeclarationOnly"
 	},
 	"devDependencies": {
 		"@ryansonshine/commitizen": "^4.2.8",
@@ -43,6 +43,7 @@
 		"@semantic-release/npm": "^9.0.2",
 		"@semantic-release/release-notes-generator": "^10.0.3",
 		"@surveyplanet/publish": "^2.0.0-beta.1",
+		"@surveyplanet/types": "^1.0.0-alpha.41",
 		"@types/jsdom": "^20.0.1",
 		"@types/node": "^18.11.18",
 		"@types/prompts": "^2.4.2",

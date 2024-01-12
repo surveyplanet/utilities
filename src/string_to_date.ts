@@ -5,7 +5,10 @@ import {
 
 /**
  * @name stringToDate
+ * @param {DateTimeInputType} type - 'datetime-local', 'date', or 'time'
+ * @param {string} isoStr - ISO string from the date input
  * @returns {Date}
+ *
  */
 
 const stringToDate = (
@@ -25,10 +28,6 @@ const stringToDate = (
 	// Time format only e.g.: 11:35
 	if (type === 'time') {
 		const [hr, min] = isoStr.split(':').map(Number);
-
-		// if (isNaN(hr) || isNaN(min)) {
-		// 	return;
-		// }
 
 		return new Date(Date.UTC(0, 0, 0, hr, min));
 	}

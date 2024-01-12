@@ -2,10 +2,10 @@ import { test, expect, describe } from 'vitest';
 import { dateToString } from '../index';
 
 describe('dateToString', () => {
-	test('should return empty string if invalid date', () => {
-		expect(dateToString('datetime-local', [''])).toBe('');
-		expect(dateToString('time', [''])).toBe('');
-		expect(dateToString('date', [''])).toBe('');
+	test('should return undefined when invalid date', () => {
+		expect(dateToString('datetime-local', [''])).toBe(undefined);
+		expect(dateToString('time', [''])).toBe(undefined);
+		expect(dateToString('date', [''])).toBe(undefined);
 	});
 	test('should return correct date-time', () => {
 		expect(
