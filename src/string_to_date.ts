@@ -1,18 +1,23 @@
-import InputType from './types/DateTimeInputType';
+import {
+	type default as DateTimeInputType,
+	isDateTimeInputType,
+} from './types/date_time_input_type';
 
 /**
- * Description.....
- *
- * time: 11:35
- * date: 1977-04-29
- * datetime-local: 1977-03-29T06:00:00
  * @name stringToDate
+ * @param {DateTimeInputType} type - 'datetime-local', 'date', or 'time'
+ * @param {string} isoStr - ISO string from the date input
  * @returns {Date}
+ *
  */
 
-let result: Date;
-const stringToDate = (type: InputType, isoStr: string): Date | undefined => {
-	console.log('stringToDate', isoStr);
+const stringToDate = (
+	type: DateTimeInputType,
+	isoStr: string
+): Date | undefined => {
+	if (!isDateTimeInputType(type)) {
+		throw new Error(`Invalid type: ${type as string}`);
+	}
 
 	if (!isoStr.length) {
 		return;
@@ -24,27 +29,19 @@ const stringToDate = (type: InputType, isoStr: string): Date | undefined => {
 	if (type === 'time') {
 		const [hr, min] = isoStr.split(':').map(Number);
 
-		if (isNaN(hr) || isNaN(min)) {
-			return undefined;
-		}
-
-		result = new Date(Date.UTC(0, 0, 0, hr, min));
-	} else if (type === 'date') {
+		return new Date(Date.UTC(0, 0, 0, hr, min));
+	}
+	// Date format only e.g.: 2020-01-01
+	if (type === 'date') {
 		const [year, month, day] = isoStr.split('-').map(Number);
-		result = new Date(Date.UTC(year, month - 1, day));
-	} else if (type === 'datetime-local') {
-		const [d, t] = isoStr.split('T');
-		const [year, month, day] = d.split('-').map(Number);
-		const [hr, min] = t.split(':').map(Number);
-
-		result = new Date(Date.UTC(year, month - 1, day, hr, min));
+		return new Date(Date.UTC(year, month - 1, day));
 	}
 
-	if (isNaN(result.getTime())) {
-		return;
-	}
+	const [d, t] = isoStr.split('T');
+	const [year, month, day] = d.split('-').map(Number);
+	const [hr, min] = t.split(':').map(Number);
 
-	return result;
+	return new Date(Date.UTC(year, month - 1, day, hr, min));
 };
 
 export default stringToDate;
