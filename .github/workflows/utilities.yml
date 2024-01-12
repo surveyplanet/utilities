@@ -1,4 +1,4 @@
-name: utilities
+name: Deploy utilities
 
 on: [push]
 
