@@ -1,10 +1,5 @@
 # SurveyPlanet Typescript utility library
 
-![Ore License](https://img.shields.io/ore/l/totaleconomy?color=yellow&style=flat-square)
-![npm](https://img.shields.io/npm/v/@surveyplanet/utilities?color=red&style=flat-square)
-![GitHub top language](https://img.shields.io/github/languages/top/surveyplanet/utilities?style=flat-square)
-![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/surveyplanet/utilities/utilities.yml?branch=main&style=flat-square)
-
 A collection of utility functions.
 
 ## Install
