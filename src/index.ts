@@ -3,6 +3,8 @@ export { default as dasherize } from './dasherize';
 export { default as delay } from './delay';
 export { default as hasLocalStorage } from './has_local_storage';
 export { default as hasSessionStorage } from './has_session_storage';
+export { default as locals } from './locals';
+export { default as session } from './session';
 export { default as stringToDate } from './string_to_date';
 export { default as dateToString } from './date_to_string';
 export { default as inBrowser } from './in_browser';
