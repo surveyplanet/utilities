@@ -3,6 +3,7 @@ export { default as dasherize } from './dasherize';
 export { default as delay } from './delay';
 export { default as hasLocalStorage } from './has_local_storage';
 export { default as hasSessionStorage } from './has_session_storage';
+export { default as humanizeDate } from './humanize_date';
 export { default as locals } from './locals';
 export { default as session } from './session';
 export { default as stringToDate } from './string_to_date';

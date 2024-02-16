@@ -10,7 +10,6 @@ import {
  * @returns {Date}
  *
  */
-
 const stringToDate = (
 	type: DateTimeInputType,
 	isoStr: string
