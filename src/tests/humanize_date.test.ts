@@ -1,4 +1,4 @@
-import { ensureISODate, type ISODate } from '@surveyplanet/types';
+import { type ISODate } from '@surveyplanet/types';
 import { test, expect, describe } from 'vitest';
 import { humanizeDate } from '../index';
 
