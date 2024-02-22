@@ -19,6 +19,7 @@ export {
 	default as transformImage,
 	type TransformOptions,
 } from './transform_image';
+export { default as uniqueId } from './unique_id';
 export {
 	default as validate,
 	validateAll,
