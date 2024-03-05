@@ -11,6 +11,10 @@ export default function omitProps<T extends object, K extends keyof T>(
 	obj: T,
 	keys: K[]
 ): Omit<T, K> {
+	if (typeof obj !== 'object' || !Array.isArray(keys)) {
+		return obj;
+	}
+
 	return Object.fromEntries(
 		Object.entries(obj).filter(([key]) => !keys.includes(key as K))
 	) as Omit<T, K>;

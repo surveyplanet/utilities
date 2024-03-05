@@ -23,4 +23,16 @@ describe('omitProps', () => {
 		const userWithoutSensitiveInfo = omitProps(user, []);
 		expect(userWithoutSensitiveInfo).toEqual(user);
 	});
+
+	it('should not modify an empty object', () => {
+		const obj = {} as Record<string, unknown>;
+		const testObj = omitProps(obj, ['key1', 'key2']);
+		expect(testObj).toEqual(obj);
+	});
+
+	it('should not modify an object since there are no keys', () => {
+		const obj = { apple: 1, peach: 2 };
+		const testObj = omitProps(obj, []);
+		expect(testObj).toEqual(obj);
+	});
 });
