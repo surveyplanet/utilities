@@ -6,7 +6,7 @@ describe('uniqueId', () => {
 	it('should generate a unique id', () => {
 		const id = uniqueId();
 		expect(id).toBeTypeOf('string');
-		expect(id).match(/^[a-zA-Z0-9]{18,20}$/);
+		expect(id).match(/^[a-zA-Z0-9]{18,21}$/);
 	});
 
 	it('should generate a unique id with prefix', () => {

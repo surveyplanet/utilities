@@ -474,7 +474,8 @@ export default function validate(
 	}
 
 	// HTMLInputElement and HTMLSelectElement are both instanceof Element
-	const isInputElement = options.value instanceof Element;
+	const isInputElement =
+		typeof Element !== 'undefined' && options.value instanceof Element;
 
 	if (isInputElement) {
 		options = parseValidationArgsFromInput(options);
