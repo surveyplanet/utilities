@@ -14,7 +14,8 @@
 		"rmrf",
 		"socio",
 		"surveyplanet",
-		"utilities"
+		"utilities",
+		"Zscore"
 	],
 	"flagWords": [],
 	"ignorePaths": [

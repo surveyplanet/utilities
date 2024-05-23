@@ -1,11 +1,11 @@
 {
 	"name": "@surveyplanet/utilities",
 	"version": "0.0.0",
-	"type": "module",
-	"main": "./dist/index.js",
-	"types": "./dist/src/index.d.ts",
 	"license": "UNLICENSED",
 	"homepage": "https://github.com/surveyplanet/utilities",
+	"main": "./dist/cjs/index.js",
+	"module": "./dist/esm/index.js",
+	"types": "./dist/cjs/index.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:surveyplanet/utilities.git"
@@ -18,13 +18,15 @@
 		"dist"
 	],
 	"scripts": {
-		"build:main": "./bin/build.js",
-		"build": "npm run clean && npm run type:dts && npm run build:main",
+		"build:cjs": "tsc --project tsconfig.cjs.json",
+		"build:esm": "tsc --project tsconfig.esm.json",
+		"build": "rm -rf dist && npm run build:cjs && npm run build:esm",
 		"clean": "rm -rf dist coverage .nyc_output",
 		"format:check": "prettier \"src/**/*.ts\" --check",
 		"format": "prettier \"src/**/*.ts\" --write",
 		"lint:check": "eslint src --ext .ts",
 		"lint": "eslint src --ext .ts --fix",
+		"check:all": "./bin/preflight.sh",
 		"release:dry": "semantic-release --dry-run",
 		"release": "semantic-release",
 		"spell": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
@@ -34,11 +36,9 @@
 		"type:check": "tsc --noEmit",
 		"type:dts": "tsc --emitDeclarationOnly"
 	},
-	"dependencies": {
-		"@surveyplanet/types": "^1.0.0-alpha.44"
-	},
 	"devDependencies": {
 		"@ryansonshine/commitizen": "^4.2.8",
+		"@surveyplanet/types": "^1.0.0-alpha.44",
 		"@ryansonshine/cz-conventional-changelog": "^3.3.4",
 		"@semantic-release/changelog": "^6.0.3",
 		"@semantic-release/commit-analyzer": "^11.1.0",
