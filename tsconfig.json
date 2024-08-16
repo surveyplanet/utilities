@@ -1,18 +1,15 @@
 {
-	"include": ["./src/**/*.ts"],
-	"exclude": ["./src/tests/**/*.ts", "./dist"],
 	"compilerOptions": {
-		"lib": ["esnext", "dom", "dom.iterable"],
-		"module": "esnext",
-		"target": "es2020",
-		"rootDir": "./",
-		"outDir": "dist",
-		"strict": true,
-		"sourceMap": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true,
 		"declaration": true,
-		"resolveJsonModule": false
-	}
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"outDir": "./dist",
+		"skipLibCheck": true,
+		"strict": true,
+		"strictNullChecks": true,
+		"target": "es2018",
+		"types": ["vitest/globals"]
+	},
+	"include": ["src"],
+	"exclude": ["node_modules", "src/test"]
 }
