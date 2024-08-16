@@ -2,8 +2,8 @@
 	"include": ["./src/**/*.ts"],
 	"exclude": ["./src/tests/**/*.ts", "./dist"],
 	"compilerOptions": {
-		"lib": ["es2020", "dom", "dom.iterable"],
-		"module": "commonjs",
+		"lib": ["esnext", "dom", "dom.iterable"],
+		"module": "esnext",
 		"target": "es2020",
 		"rootDir": "./",
 		"outDir": "dist",
@@ -13,6 +13,6 @@
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 		"declaration": true,
-		"resolveJsonModule": true
+		"resolveJsonModule": false
 	}
 }
