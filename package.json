@@ -24,7 +24,7 @@
 		"clean": "rm -rf dist coverage .nyc_output",
 		"format": "prettier \"src/**/*.ts\" --check",
 		"lint": "eslint src --ext .ts",
-		"check:all": "./bin/preflight.sh",
+		"check": "./bin/preflight.sh",
 		"release:dry": "semantic-release --dry-run",
 		"release": "semantic-release",
 		"spell": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
