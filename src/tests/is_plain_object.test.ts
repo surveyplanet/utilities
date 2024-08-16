@@ -63,5 +63,6 @@ describe('isPlainObject', () => {
 		const blob = new Blob();
 		expect(isPlainObject(blob)).toBeFalsy();
 		expect(isPlainObject(new File([''], 'test.txt'))).toBeFalsy();
+		expect(isPlainObject(new FormData())).toBeFalsy();
 	});
 });
