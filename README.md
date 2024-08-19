@@ -206,10 +206,8 @@ It also uses [cspell](https://github.com/streetsidesoftware/cspell) to ensure sp
 
 ### Commands
 
--   `format`: runs prettier with automatic fixing
--   `format:check`: runs prettier without automatic fixing (used in CI)
--   `lint`: runs eslint with automatic fixing
--   `lint:check`: runs eslint without automatic fixing (used in CI)
+-   `format`: runs prettier without automatic fixing (used in CI)
+-   `lint`: runs eslint without automatic fixing (used in CI)
 -   `spell`: runs spell checker
 
 ## Releasing
