@@ -1,7 +1,8 @@
 export { default as cloneDeep } from './clone_deep';
 export { default as dasherize } from './dasherize';
 export { default as dateToString } from './date_to_string';
-export { default as delay } from './delay';
+// export { default as delay } from './delay';
+export { delay } from './delay';
 export { default as estimateSampleSize } from './estimate_sample_size';
 export { default as hasLocalStorage } from './has_local_storage';
 export { default as hasSessionStorage } from './has_session_storage';

@@ -6,6 +6,6 @@
  * @async
  * @returns Promise<void>
  */
-export default async (ms = 0): Promise<void> => {
+export const delay = async (ms = 0): Promise<void> => {
 	return await new Promise((resolve) => setTimeout(resolve, ms));
 };
