@@ -5,7 +5,7 @@
  * @see https://stackoverflow.com/questions/16427636/check-if-localstorage-is-available
  * @returns {boolean}
  */
-export default (str: string, delimiter: '-' | '_' = '-'): string => {
+export const dasherize = (str: string, delimiter: '-' | '_' = '-'): string => {
 	str = str
 		.trim()
 		.replace(/([A-Z])/g, `${delimiter}$1`)

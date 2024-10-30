@@ -1,7 +1,7 @@
 const TEST_NAME = '__local_storage_test__';
 const TEST_VAL = 'yes';
 
-const locals = {
+export const locals = {
 	/**
 	 * Check if localStorage is available
 	 *
@@ -80,5 +80,3 @@ const locals = {
 		}
 	},
 } as const;
-
-export default locals;

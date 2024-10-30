@@ -5,5 +5,6 @@
  * @name inWorker
  * @returns {Boolean}
  */
-export default typeof self === 'object' &&
+export const inWorker =
+	typeof self === 'object' &&
 	self.constructor.name === 'DedicatedWorkerGlobalScope';

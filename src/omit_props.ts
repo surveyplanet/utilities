@@ -7,10 +7,10 @@
  * @param keys - The keys to omit from the object.
  * @returns A new object with the specified properties omitted.
  */
-export default function omitProps<T extends object, K extends keyof T>(
+export const omitProps = <T extends object, K extends keyof T>(
 	obj: T,
 	keys: K[]
-): Omit<T, K> {
+): Omit<T, K> => {
 	if (typeof obj !== 'object' || !Array.isArray(keys)) {
 		return obj;
 	}
@@ -18,4 +18,4 @@ export default function omitProps<T extends object, K extends keyof T>(
 	return Object.fromEntries(
 		Object.entries(obj).filter(([key]) => !keys.includes(key as K))
 	) as Omit<T, K>;
-}
+};

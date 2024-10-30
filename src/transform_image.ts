@@ -71,7 +71,7 @@ const ROOT_URL = 'https://media.surveyplanet.com';
  * @async
  * @returns string
  */
-export default (
+export const transformImage = (
 	url: string,
 	options: TransformOptions = {},
 	format?: 'png' | 'jpg' | 'jpeg' | 'gif'

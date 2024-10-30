@@ -5,6 +5,6 @@
  * @param {T} value - The value to check.
  * @returns {boolean} - Whether the input value is Date or not.
  */
-export default function isDate<T>(value: T): value is Extract<T, Date> {
+export const isDate = <T>(value: T): value is Extract<T, Date> => {
 	return value instanceof Date && !isNaN(value.getTime());
-}
+};

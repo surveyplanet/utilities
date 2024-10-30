@@ -1,7 +1,7 @@
 const TEST_NAME = '__session_storage_test__';
 const TEST_VAL = 'yes';
 
-const session = {
+export const session = {
 	/**
 	 * Check if sessionStorage is available
 	 *
@@ -80,5 +80,3 @@ const session = {
 		}
 	},
 } as const;
-
-export default session;

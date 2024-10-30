@@ -464,9 +464,9 @@ export function validateAll(options: ValidateArgs[]): ValidatorError[] {
  *   data-validate-show-errors />
  */
 
-export default function validate(
+export const validate = (
 	options: ValidateArgs | ValidateArgs[]
-): ValidatorError[] {
+): ValidatorError[] => {
 	const errors: ValidatorError[] = [];
 
 	if (Array.isArray(options)) {
@@ -528,7 +528,7 @@ export default function validate(
 	}
 
 	return errors;
-}
+};
 
 /**
  * Returns validation arguments give an html input element

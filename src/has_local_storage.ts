@@ -9,7 +9,7 @@
 const TEST_NAME = '__local_storage_test__';
 const TEST_VAL = 'yes';
 
-export default function (): boolean {
+export const hasLocalStorage = (): boolean => {
 	console.warn(
 		'hasLocalStorage() is deprecated. Use locals.available() instead.'
 	);
@@ -28,4 +28,4 @@ export default function (): boolean {
 	} catch (e) {
 		return false; // localStorage is disabled
 	}
-}
+};

@@ -2,7 +2,7 @@
 
 import { describe, expect, it, beforeAll } from 'vitest';
 import {
-	default as validate,
+	validate,
 	validateAll,
 	RULES,
 	parseRule,

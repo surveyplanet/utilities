@@ -5,7 +5,7 @@
  * @returns {Date}
  *
  */
-const stringToDate = (
+export const stringToDate = (
 	value: string,
 	type?: 'date' | 'time' | 'datetime-local'
 ): Date | undefined => {
@@ -82,5 +82,3 @@ const stringToDate = (
 
 	return new Date(Date.UTC(year, month - 1, day, hr, min));
 };
-
-export default stringToDate;

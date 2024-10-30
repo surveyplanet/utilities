@@ -30,11 +30,11 @@ function getZscore(confidence: number) {
  * @returns {number}
  * @example estimateSampleSize(100000, 0.05, 0.95) // returns 383
  */
-function estimateSampleSize(
+export const estimateSampleSize = (
 	population: number,
 	marginOfError: number,
 	confidenceLevel = 0.95
-): number {
+): number => {
 	const z = getZscore(confidenceLevel);
 	const p = 0.5; // proportion of success
 	const q = 1 - p; // proportion of failure
@@ -48,6 +48,4 @@ function estimateSampleSize(
 	}
 
 	return Math.ceil(sample);
-}
-
-export default estimateSampleSize;
+};

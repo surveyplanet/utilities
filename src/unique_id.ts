@@ -5,7 +5,7 @@
  * @param {string} suffix - The optional suffix to append to the ID.
  * @returns {string} The generated unique ID.
  */
-export default (prefix?: string, suffix?: string): string => {
+export const uniqueId = (prefix?: string, suffix?: string): string => {
 	let id = Date.now().toString(36) + Math.random().toString(36).slice(2);
 
 	if (prefix?.length) {
