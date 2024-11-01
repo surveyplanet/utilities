@@ -2,7 +2,22 @@ import { test, expect, describe } from 'vitest';
 import { dateToString } from '../index';
 
 describe('dateToString', () => {
-	const date = new Date(2000, 3, 27, 13, 30, 1, 0);
+	const year = 2024;
+	const month = 3;
+	const day = 27;
+	const hours = 13;
+	const minutes = 30;
+	const seconds = 1;
+	const milliseconds = 0;
+	const date = new Date(
+		year,
+		month,
+		day,
+		hours,
+		minutes,
+		seconds,
+		milliseconds
+	);
 
 	test('should return undefined when date is invalid', () => {
 		expect(dateToString('', 'datetime-local')).toBe(undefined);
@@ -37,21 +52,29 @@ describe('dateToString', () => {
 	});
 
 	test('should return correct date-time', () => {
-		const res = '2000-04-27T13:30:01';
-		expect(dateToString(date, 'datetime-local')).toBe(res);
-		expect(dateToString(date)).toBe(res);
-		expect(dateToString(date.toISOString(), 'datetime-local')).toBe(res);
+		const result = `${year}-${(month + 1).toFixed(0).padStart(2, '0')}-${day
+			.toFixed(0)
+			.padStart(2, '0')}T${hours.toFixed(0).padStart(2, '0')}:${minutes
+			.toFixed(0)
+			.padStart(2, '0')}:${seconds.toFixed(0).padStart(2, '0')}`;
+		expect(dateToString(date)).toBe(result);
+		expect(dateToString(date.toISOString(), 'datetime-local')).toBe(result);
 	});
 
 	test('should return correct date', () => {
-		const res = '2000-04-27';
-		expect(dateToString(date, 'date')).toBe(res);
-		expect(dateToString(date.toISOString(), 'date')).toBe(res);
+		const result = `${year}-${(month + 1).toFixed(0).padStart(2, '0')}-${day
+			.toFixed(0)
+			.padStart(2, '0')}`;
+		expect(dateToString(date, 'date')).toBe(result);
+		expect(dateToString(date.toISOString(), 'date')).toBe(result);
 	});
 
 	test('should return correct time', () => {
-		const res = '13:30:01';
-		expect(dateToString(date, 'time')).toBe(res);
-		expect(dateToString(date.toISOString(), 'time')).toBe(res);
+		const result = `${hours.toFixed(0).padStart(2, '0')}:${minutes
+			.toFixed(0)
+			.padStart(2, '0')}:${seconds.toFixed(0).padStart(2, '0')}`;
+
+		expect(dateToString(date, 'time')).toBe(result);
+		expect(dateToString(date.toISOString(), 'time')).toBe(result);
 	});
 });
