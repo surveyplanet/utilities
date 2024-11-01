@@ -56,7 +56,7 @@ describe('dateToString', () => {
 			.toFixed(0)
 			.padStart(2, '0')}T${hours.toFixed(0).padStart(2, '0')}:${minutes
 			.toFixed(0)
-			.padStart(2, '0')}:${seconds.toFixed(0).padStart(2, '0')}`;
+			.padStart(2, '0')}`;
 		expect(dateToString(date)).toBe(result);
 		expect(dateToString(date.toISOString(), 'datetime-local')).toBe(result);
 	});
@@ -72,7 +72,7 @@ describe('dateToString', () => {
 	test('should return correct time', () => {
 		const result = `${hours.toFixed(0).padStart(2, '0')}:${minutes
 			.toFixed(0)
-			.padStart(2, '0')}:${seconds.toFixed(0).padStart(2, '0')}`;
+			.padStart(2, '0')}`;
 
 		expect(dateToString(date, 'time')).toBe(result);
 		expect(dateToString(date.toISOString(), 'time')).toBe(result);

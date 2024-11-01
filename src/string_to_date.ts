@@ -3,11 +3,10 @@
  * @param {string} value - A string representing the date entered in the input. The date is formatted according to [Date strings format](https://developer.mozilla.org/en-US/docs/Web/HTML/Date_and_time_formats#date_strings).
  * @param {'datetime-local', 'date', or 'time'} type - 'datetime-local', 'date', or 'time'
  * @returns {Date}
- *
  */
 export const stringToDate = (
 	value: string,
-	type?: 'date' | 'time' | 'datetime-local'
+	type: 'date' | 'time' | 'datetime-local' = 'datetime-local'
 ): Date | undefined => {
 	if (typeof value !== 'string') {
 		return;

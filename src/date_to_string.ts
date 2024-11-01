@@ -7,7 +7,7 @@
  */
 export const dateToString = (
 	value: string | Date,
-	type?: 'date' | 'time' | 'datetime-local'
+	type: 'date' | 'time' | 'datetime-local' = 'datetime-local'
 ): string | undefined => {
 	if (
 		!(value instanceof Date) &&
@@ -16,31 +16,40 @@ export const dateToString = (
 		return;
 	}
 
-	const dateVal = value instanceof Date ? value : new Date(value);
-	// ensure the date doesn't change when converting to UTC
-	const date = new Date(
-		Date.UTC(
-			dateVal.getFullYear(),
-			dateVal.getMonth(),
-			dateVal.getDate(),
-			dateVal.getHours(),
-			dateVal.getMinutes(),
-			dateVal.getSeconds(),
-			dateVal.getMilliseconds()
-		)
-	);
+	const date = value instanceof Date ? value : new Date(value);
 
+	// Validate the date
 	if (isNaN(date.getTime())) {
-		return;
+		return undefined;
 	}
 
-	if (type === 'time') {
-		return date.toISOString().split('T')[1].split('.')[0];
+	// Ensure the type is valid
+	if (!['date', 'time', 'datetime-local'].includes(type)) {
+		type = 'datetime-local';
 	}
 
-	if (type === 'date') {
-		return date.toISOString().split('T')[0];
-	}
+	// Get timezone offset in minutes
+	const tzOffset = date.getTimezoneOffset();
 
-	return date.toISOString().split('.')[0]; // default to datetime-local
+	// Adjust date for timezone
+	const localDate = new Date(date.getTime() - tzOffset * 60000);
+
+	// Convert to ISO string and remove the 'Z' timezone indicator
+	const isoString = localDate.toISOString().slice(0, -1);
+
+	// Return appropriate format based on type
+	switch (type) {
+		case 'date':
+			return isoString.split('T')[0];
+		case 'time':
+			return isoString.split('T')[1].slice(0, 5); // Only return HH:mm
+		case 'datetime-local':
+			return (
+				isoString.split('T')[0] +
+				'T' +
+				isoString.split('T')[1].slice(0, 5)
+			); // Include date and HH:mm
+		default:
+			throw new Error('Invalid type specified');
+	}
 };
