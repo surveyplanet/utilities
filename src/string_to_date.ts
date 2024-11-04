@@ -30,7 +30,7 @@ export const stringToDate = (
 			return;
 		}
 
-		return new Date(Date.UTC(0, 0, 0, hr, min));
+		return new Date(0, 0, 0, hr, min);
 	}
 
 	// Date format only e.g.: 2020-01-01
@@ -45,7 +45,7 @@ export const stringToDate = (
 		if (day < 1 || day > 31) {
 			return;
 		}
-		return new Date(Date.UTC(year, month - 1, day));
+		return new Date(year, month - 1, day);
 	}
 
 	// default to Datetime-local format e.g.: 2020-01-01T11:35
@@ -79,5 +79,5 @@ export const stringToDate = (
 		return;
 	}
 
-	return new Date(Date.UTC(year, month - 1, day, hr, min));
+	return new Date(year, month - 1, day, hr, min);
 };
