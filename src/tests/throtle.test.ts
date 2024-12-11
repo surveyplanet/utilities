@@ -1,5 +1,5 @@
 import { test, expect, describe, vi } from 'vitest';
-import { throttle } from '../throtle';
+import { throttle } from '../throttle';
 
 describe('throttle', () => {
 	test('should call the function immediately and then throttle subsequent calls', () => {

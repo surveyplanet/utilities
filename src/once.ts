@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 export function once(fn: Function) {
 	let called = false;
-	return function (this: any, ...args: any[]) {
+	return function (this: unknown, ...args: unknown[]) {
 		if (!called) {
 			called = true;
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
