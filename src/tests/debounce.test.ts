@@ -1,43 +1,44 @@
 import { describe, test, expect, vi } from 'vitest';
-import { debounce } from '../debounce';
+import { debounce, delay } from '../index';
 
 describe('debounce', () => {
-	test('should call the function after the specified delay', () => {
+	const waitFor = 100;
+
+	test('should call the function after the specified delay with correct context', async () => {
 		const fn = vi.fn();
-		const debouncedFn = debounce(fn);
+		const debouncedFn = debounce(fn, waitFor);
 		const event = new Event('click');
 
 		debouncedFn(event);
 		expect(fn).not.toHaveBeenCalled();
 
-		setTimeout(() => {
-			expect(fn).toHaveBeenCalled();
-		}, 150);
+		await delay(waitFor + 1);
+		expect(fn).toHaveBeenCalled();
+		expect(fn).toHaveBeenCalledWith(event);
 	});
 
-	test('should reset the delay if called again within the delay period', () => {
+	test('should reset the delay if called again within the delay period', async () => {
 		const fn = vi.fn();
-		const debouncedFn = debounce(fn);
-		const event = new Event('click');
+		const debouncedFn = debounce(fn, waitFor);
 
-		debouncedFn(event);
-		debouncedFn(event);
+		debouncedFn();
+		debouncedFn();
 		expect(fn).not.toHaveBeenCalled();
 
-		setTimeout(() => {
-			expect(fn).toHaveBeenCalledTimes(1);
-		}, 150);
+		await delay(waitFor + 1);
+		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
-	test('should call the function with the correct context', () => {
+	test('should not reset the delay called again after the delay period', async () => {
 		const fn = vi.fn();
-		const debouncedFn = debounce(fn);
-		const event = new Event('click');
+		const debouncedFn = debounce(fn, waitFor);
 
-		debouncedFn(event);
+		debouncedFn();
+		await delay(waitFor + 1);
 
-		setTimeout(() => {
-			expect(fn).toHaveBeenCalledWith(event);
-		}, 150);
+		debouncedFn();
+		await delay(waitFor + 1);
+
+		expect(fn).toHaveBeenCalledTimes(2);
 	});
 });

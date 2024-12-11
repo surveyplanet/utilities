@@ -1,16 +1,22 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-// The debounce function is a higher-order function that takes a function (fn) as an argument.
-// It returns a new function that, when called, will first call the clearTimeout method on the event object,
-// preventing the event from bubbling up the DOM tree, and then call the original function (fn).
-/* eslint-disable @typescript-eslint/ban-types */
+/**
+ * Delays execution and resets the delay timer each time the function is called:
+ * It waits until calls have "settled down" before executing
+ * If you keep calling it, it keeps delaying until you stop
+ * Best for: search inputs, window resize handlers, save drafts
+ * @param func
+ * @param waitFor
+ * @see https://css-tricks.com/debouncing-throttling-explained-examples
+ * @returns
+ */
 
-export function debounce(fn: Function) {
+export const debounce = <F extends (...args: Parameters<F>) => ReturnType<F>>(
+	func: F,
+	waitFor = 0
+) => {
 	let timeout: NodeJS.Timeout;
-	return function (event: Event) {
-		clearTimeout(timeout);
-		timeout = setTimeout(() => fn.call(event), 100);
-	};
-}
 
-/* eslint-enable @typescript-eslint/ban-types */
-/* eslint-enable @typescript-eslint/no-unsafe-return */
+	return (...args: Parameters<F>) => {
+		clearTimeout(timeout);
+		timeout = setTimeout(() => func(...args), waitFor);
+	};
+};

@@ -1,17 +1,43 @@
-// The throttle function is a higher-order function that takes a function (fn) as an argument.
-// It returns a new function that, when called, will first call the clearTimeout method on the event object,
-// preventing the event from bubbling up the DOM tree, and then call the original function (fn).
-/* eslint-disable @typescript-eslint/ban-types */
+/**
+ * Limits the function to being called at most once per specified time period:
+ * It will execute immediately, then enforce a cool down period
+ * Additional calls during the cool down are ignored
+ * Best for: scroll handlers, game controls, API rate limiting
+ * @param func
+ * @param waitFor
+ * @see https://css-tricks.com/debouncing-throttling-explained-examples
+ * @returns function
+ */
 
-export function throttle(fn: Function) {
-	let wait = false;
-	return function (event: Event) {
-		if (!wait) {
-			fn.call(event);
-			wait = true;
-			setTimeout(() => (wait = false), 300);
+export const throttle = <F extends (...args: Parameters<F>) => ReturnType<F>>(
+	func: F,
+	waitFor = 0
+) => {
+	let lastExecuted = 0;
+	let timeout: NodeJS.Timeout | null = null;
+
+	return (...args: Parameters<F>) => {
+		const now = Date.now();
+		const timeSinceLastExecution = now - lastExecuted;
+
+		// If we're still within the wait period
+		if (timeSinceLastExecution < waitFor) {
+			// Clear any existing timeout
+			if (timeout) {
+				clearTimeout(timeout);
+			}
+
+			// Schedule the execution for when the wait period ends
+			timeout = setTimeout(() => {
+				lastExecuted = Date.now();
+				func(...args);
+			}, waitFor - timeSinceLastExecution);
+
+			return;
 		}
-	};
-}
 
-/* eslint-enable @typescript-eslint/ban-types */
+		// If we're outside the wait period, execute immediately
+		lastExecuted = now;
+		func(...args);
+	};
+};
