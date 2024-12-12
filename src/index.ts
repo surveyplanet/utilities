@@ -1,9 +1,10 @@
 export { cloneDeep } from './clone_deep';
 export { dasherize } from './dasherize';
 export { dateToString } from './date_to_string';
-export { debounce } from './debounce';
+export { debounce, throttle } from 'throttle-debounce';
 export { delay } from './delay';
 export { estimateSampleSize } from './estimate_sample_size';
+export { get } from './get';
 export { hasLocalStorage } from './has_local_storage';
 export { humanizeDate } from './humanize_date';
 export { inBrowser } from './in_browser';
@@ -17,7 +18,7 @@ export { omitProps } from './omit_props';
 export { once } from './once';
 export { session } from './session';
 export { stringToDate } from './string_to_date';
-export { throttle } from './throttle';
+// export { throttle } from 'throttle-debounce';
 export { transformImage, type TransformOptions } from './transform_image';
 export { uniqueId } from './unique_id';
 export {
