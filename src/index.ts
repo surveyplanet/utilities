@@ -18,7 +18,7 @@ export { omitProps } from './omit_props';
 export { once } from './once';
 export { session } from './session';
 export { stringToDate } from './string_to_date';
-// export { throttle } from 'throttle-debounce';
+export { titleize } from './titleize';
 export { transformImage, type TransformOptions } from './transform_image';
 export { uniqueId } from './unique_id';
 export {
