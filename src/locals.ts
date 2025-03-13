@@ -39,24 +39,27 @@ export const locals = {
 	},
 
 	/**
-	 * Retrieves a value from  local storage.
+	 * Retrieves a value from local storage.
 	 *
 	 * @method get
 	 * @param {string} name The name of the local storage value being retrieved
-	 * @param {T} defaultVal The default value to return if the value is not found
-	 * @return {T}
+	 * @param {D} defaultVal The default value to return if the value is not found
+	 * @return The retrieved value or default value
 	 */
-	get: <T>(name: string, defaultVal: T | undefined = undefined): T | null => {
+	get: <T, D extends T | undefined = undefined>(
+		name: string,
+		defaultVal?: D
+	): D extends undefined ? T | null : T => {
 		const value = localStorage.getItem(name);
 
 		if (value === null) {
-			return defaultVal ?? null;
+			return (defaultVal ?? null) as D extends undefined ? T | null : T;
 		}
 
 		try {
 			return JSON.parse(value) as T;
 		} catch (error) {
-			return null;
+			return (defaultVal ?? null) as D extends undefined ? T | null : T;
 		}
 	},
 

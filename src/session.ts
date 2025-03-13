@@ -39,27 +39,27 @@ export const session = {
 	},
 
 	/**
-	 * Creates a session storage value. This is a wrapper around sessionStorage.setItem() where all values are stringified.
+	 * Retrieves a value from session storage.
 	 *
-	 * @method set
-	 * @param {string} name The name of the session storage value
-	 * @param {T} defaultValue The default value to return if the value is not found
-	 * @return {T}
+	 * @method get
+	 * @param {string} name The name of the session storage value being retrieved
+	 * @param {D} defaultVal The default value to return if the value is not found
+	 * @return The retrieved value or default value
 	 */
-	get: <T>(
+	get: <T, D extends T | undefined = undefined>(
 		name: string,
-		defaultValue: T | undefined = undefined
-	): T | null => {
+		defaultVal?: D
+	): D extends undefined ? T | null : T => {
 		const value = sessionStorage.getItem(name);
 
 		if (value === null) {
-			return defaultValue ?? null;
+			return (defaultVal ?? null) as D extends undefined ? T | null : T;
 		}
 
 		try {
 			return JSON.parse(value) as T;
 		} catch (error) {
-			return null;
+			return (defaultVal ?? null) as D extends undefined ? T | null : T;
 		}
 	},
 
