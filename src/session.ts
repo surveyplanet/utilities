@@ -30,14 +30,10 @@ export const session = {
 	 * Creates a session value. This is a wrapper around sessionStorage.setItem() where all values are stringified.
 	 *
 	 * @method set
-	 * @param {string} name the name of the session object
-	 * @param {T} value the value of the session object
+	 * @param {string} name The name of the session object
+	 * @param {T} value The value of the session object
 	 */
 	set: <T>(name: string, value: T) => {
-		if (!session.available()) {
-			return null;
-		}
-
 		const val = JSON.stringify(value);
 		sessionStorage.setItem(name, val);
 	},
@@ -46,19 +42,18 @@ export const session = {
 	 * Creates a session storage value. This is a wrapper around sessionStorage.setItem() where all values are stringified.
 	 *
 	 * @method set
-	 * @param {string} name the name of the session storage value
-	 * @param {T} value the value of the session object
+	 * @param {string} name The name of the session storage value
+	 * @param {T} defaultValue The default value to return if the value is not found
 	 * @return {T}
 	 */
-	get: <T>(name: string, defaultVal: T | undefined = undefined): T | null => {
-		if (!session.available()) {
-			return defaultVal ?? null;
-		}
-
+	get: <T>(
+		name: string,
+		defaultValue: T | undefined = undefined
+	): T | null => {
 		const value = sessionStorage.getItem(name);
 
 		if (value === null) {
-			return defaultVal ?? null;
+			return defaultValue ?? null;
 		}
 
 		try {
@@ -72,11 +67,9 @@ export const session = {
 	 * Removes a session object.
 	 *
 	 * @method remove
-	 * @param {string} name the name of the session object being retrieved
+	 * @param {string} name The name of the session object being removed
 	 */
 	remove: (name: string) => {
-		if (session.available()) {
-			sessionStorage.removeItem(name);
-		}
+		sessionStorage.removeItem(name);
 	},
 } as const;

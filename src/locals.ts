@@ -30,14 +30,10 @@ export const locals = {
 	 * Creates a local storage value. This is a wrapper around localStorage.setItem() where all values are stringified.
 	 *
 	 * @method set
-	 * @param {string} name the name of the local storage value
-	 * @param {T} value the value of the local object
+	 * @param {string} name The name of the local storage value
+	 * @param {T} value The value of the local object
 	 */
 	set: <T>(name: string, value: T) => {
-		if (!locals.available()) {
-			return null;
-		}
-
 		const val = JSON.stringify(value);
 		localStorage.setItem(name, val);
 	},
@@ -47,14 +43,10 @@ export const locals = {
 	 *
 	 * @method get
 	 * @param {string} name The name of the local storage value being retrieved
-	 * @param {T} defaultVal A default value if local storage value is undefined
+	 * @param {T} defaultVal The default value to return if the value is not found
 	 * @return {T}
 	 */
 	get: <T>(name: string, defaultVal: T | undefined = undefined): T | null => {
-		if (!locals.available()) {
-			return defaultVal ?? null;
-		}
-
 		const value = localStorage.getItem(name);
 
 		if (value === null) {
@@ -72,11 +64,9 @@ export const locals = {
 	 * Removes a local object.
 	 *
 	 * @method remove
-	 * @param {string} name the name of the local object being retrieved
+	 * @param {string} name The name of the local object being removed
 	 */
 	remove: (name: string) => {
-		if (locals.available()) {
-			localStorage.removeItem(name);
-		}
+		localStorage.removeItem(name);
 	},
 } as const;
