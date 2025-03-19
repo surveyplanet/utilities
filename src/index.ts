@@ -4,6 +4,7 @@ export { dateToString } from './date_to_string';
 export { debounce, throttle } from 'throttle-debounce';
 export { delay } from './delay';
 export { estimateSampleSize } from './estimate_sample_size';
+export { estimateQuestionLength } from './estimate_question_length';
 export { get } from './get';
 export { hasLocalStorage } from './has_local_storage';
 export { humanizeDate } from './humanize_date';
