@@ -3,26 +3,26 @@
  * @param data - Array of objects to sort
  * @param key - The object property to sort by
  * @param ascending - Sort direction, true for ascending, false for descending
- * @param customCompare - Optional custom comparison function
+ * @param comparator - Optional custom comparison function
  * @returns Sorted array
  */
 export function smartSort<T extends Record<string, unknown>>(
 	data: T[],
 	key: keyof T,
 	ascending = true,
-	customCompare?: (a: unknown, b: unknown) => number
+	comparator?: (a: unknown, b: unknown) => number
 ): T[] {
 	// Create a copy to avoid modifying the original array
 	const sortedData = [...data];
 
 	return sortedData.sort((a, b) => {
-		if (customCompare) {
+		if (comparator) {
 			return ascending
-				? customCompare(a[key], b[key])
-				: customCompare(b[key], a[key]);
+				? comparator(a[key], b[key])
+				: comparator(b[key], a[key]);
 		}
 
-		// Handle undefined or null values
+		// undefined or null
 		if (a[key] == null) return ascending ? -1 : 1;
 		if (b[key] == null) return ascending ? 1 : -1;
 
@@ -54,7 +54,7 @@ export function smartSort<T extends Record<string, unknown>>(
 				: Number(b[key]) - Number(a[key]);
 		}
 
-		// Default comparison for other types
+		// Default
 		return ascending
 			? String(a[key]).localeCompare(String(b[key]))
 			: String(b[key]).localeCompare(String(a[key]));
