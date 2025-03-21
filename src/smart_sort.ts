@@ -6,7 +6,7 @@
  * @param comparator - Optional custom comparison function
  * @returns Sorted array
  */
-export function smartSort<T extends Record<string, unknown>>(
+export function smartSort<T extends { [K in keyof T]: unknown }>(
 	data: T[],
 	key: keyof T,
 	ascending = true,
@@ -27,11 +27,11 @@ export function smartSort<T extends Record<string, unknown>>(
 		if (b[key] == null) return ascending ? 1 : -1;
 
 		// Strings
-		if (typeof a[key] === 'string' && typeof b[key] === 'string') {
-			return ascending
-				? (a[key] as string).localeCompare(b[key] as string)
-				: (b[key] as string).localeCompare(a[key] as string);
-		}
+		// if (typeof a[key] === 'string' && typeof b[key] === 'string') {
+		// 	return ascending
+		// 		? (a[key] as string).localeCompare(b[key] as string)
+		// 		: (b[key] as string).localeCompare(a[key] as string);
+		// }
 
 		// Numbers
 		if (typeof a[key] === 'number' && typeof b[key] === 'number') {
@@ -54,7 +54,7 @@ export function smartSort<T extends Record<string, unknown>>(
 				: Number(b[key]) - Number(a[key]);
 		}
 
-		// Default
+		// Default (string)
 		return ascending
 			? String(a[key]).localeCompare(String(b[key]))
 			: String(b[key]).localeCompare(String(a[key]));

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { vi, describe, it, expect, expectTypeOf } from 'vitest';
 import { smartSort } from '../index';
 
 describe('smartSort', () => {
@@ -95,7 +95,6 @@ describe('smartSort', () => {
 
 	it('should sort dates in ascending order', () => {
 		const result = smartSort(users, 'created');
-		// null dates should come first in ascending order
 		expect(result[0].created).toBe(null);
 		expect(result[1].created?.getTime()).toBe(
 			new Date('2022-11-05').getTime()
@@ -125,18 +124,16 @@ describe('smartSort', () => {
 		expect(result[3].created?.getTime()).toBe(
 			new Date('2022-11-05').getTime()
 		);
-		// null dates should come last in descending order
 		expect(result[4].created).toBe(null);
 	});
 
 	it('should use custom comparison function when provided', () => {
-		// Sort by name length
-		const result = smartSort(
-			users,
-			'name',
-			true,
+		const mockComparator = vi.fn(
 			(a, b) => String(a).length - String(b).length
 		);
+		const result = smartSort(users, 'name', true, mockComparator);
+
+		expect(mockComparator).toHaveBeenCalled();
 		expect(result[0].name).toBe('Bob');
 		expect(result[1].name).toBe('Eva');
 		expect(result[2].name).toBe('Alice');
@@ -164,7 +161,6 @@ describe('smartSort', () => {
 			{ value: { nested: 'object' } },
 		];
 
-		// Should not throw an error
 		const result = smartSort(mixedData, 'value');
 		expect(result.length).toBe(mixedData.length);
 	});
@@ -179,5 +175,15 @@ describe('smartSort', () => {
 		const singleItem = [{ id: 1, name: 'Single' }];
 		const result = smartSort(singleItem, 'name');
 		expect(result).toEqual(singleItem);
+	});
+
+	it('should enforce proper types', () => {
+		interface User {
+			id: number;
+			name: string;
+		}
+		const users: User[] = [{ id: 1, name: 'Single' }];
+		const result = smartSort(users, 'name');
+		expectTypeOf(result).toEqualTypeOf<User[]>(users);
 	});
 });
