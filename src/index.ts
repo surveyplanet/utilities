@@ -18,6 +18,7 @@ export { locals } from './locals';
 export { omitProps } from './omit_props';
 export { once } from './once';
 export { session } from './session';
+export { smartSort } from './smart_sort';
 export { stringToDate } from './string_to_date';
 export { titleize } from './titleize';
 export { transformImage, type TransformOptions } from './transform_image';
