@@ -183,7 +183,7 @@ describe('smartSort', () => {
 			name: string;
 		}
 		const users: User[] = [{ id: 1, name: 'Single' }];
-		const result = smartSort(users, 'name');
+		const result = smartSort<User>(users, 'name');
 		expectTypeOf(result).toEqualTypeOf<User[]>(users);
 	});
 });

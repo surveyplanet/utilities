@@ -12,6 +12,7 @@ export { inBrowser } from './in_browser';
 export { inJsDom } from './in_jsdom';
 export { inNode } from './in_node';
 export { inWorker } from './in_worker';
+export { insert } from './insert';
 export { isDate } from './is_date';
 export { isPlainObject } from './is_plain_object';
 export { locals } from './locals';
