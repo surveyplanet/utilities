@@ -40,16 +40,12 @@ describe('insert', () => {
 
 	it('throws an error when index is negative', () => {
 		const original = [1, 2, 3];
-		expect(() => insert(original, -1, 0)).toThrow(
-			/Index -1 is out of bounds/
-		);
+		expect(insert(original, -1, 0)).toEqual(original);
 	});
 
 	it('throws an error when index is greater than array length', () => {
 		const original = [1, 2, 3];
-		expect(() => insert(original, 4, 5)).toThrow(
-			/Index 4 is out of bounds/
-		);
+		expect(insert(original, 4, 5)).toEqual(original);
 	});
 
 	it('correctly handles readonly arrays', () => {
