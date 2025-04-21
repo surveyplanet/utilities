@@ -8,21 +8,22 @@ describe('humanizeDate', () => {
 	test('should return date string with default settings', () => {
 		expect(humanizeDate(date)).toBe('Feb 15, 2024');
 	});
+
 	test('should return date string from ISO date string', () => {
 		expect(humanizeDate(date.toISOString() as ISODate)).toBe(
 			'Feb 15, 2024'
 		);
 	});
 	test('should return date string in arabic', () => {
-		expect(humanizeDate(date, 'ar-EG')).toBe('١٥ فبراير ٢٠٢٤'); // cspell: disable-line
+		expect(humanizeDate(date, {}, 'ar-EG')).toBe('١٥‏/٢‏/٢٠٢٤'); // cspell: disable-line
 	});
 
-	test.skip('should return date string from in long format (This fails in ci since there is no comma)', () => {
+	test.skip('should return date string in long format (This should be fine in browser)', () => {
 		const options: Intl.DateTimeFormatOptions = {
 			weekday: 'long',
 			month: 'long',
 		};
-		expect(humanizeDate(date, 'en-GB', options)).toBe(
+		expect(humanizeDate(date, options, 'en-GB')).toBe(
 			'Thursday, 15 February 2024'
 		);
 	});
@@ -32,6 +33,17 @@ describe('humanizeDate', () => {
 			month: '2-digit',
 			day: '2-digit',
 		};
-		expect(humanizeDate(date, 'en-US', options)).toBe('02/15/2024');
+		expect(humanizeDate(date, options, 'en-US')).toBe('02/15/2024');
+	});
+
+	test('should return date string with time only', () => {
+		expect(humanizeDate(date, { timeOnly: true }, 'en-US')).toBe(
+			'12:00 AM'
+		);
+	});
+	test('should return date string with full time', () => {
+		expect(humanizeDate(date, { full: true }, 'en-US')).toBe(
+			'Feb 15, 2024, 12:00 AM'
+		);
 	});
 });

@@ -98,35 +98,35 @@ const errors = validate( options );
 
 #### Validation rules
 
-| Property              | Description                                                                                                      |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `required`            | Must not be empty.                                                                                               |
-| `matches[number]`     | Must match another field value.                                                                                  |
-| `url`                 | Must be a valid url.                                                                                             |
-| `email`               | Must be a valid email address.                                                                                   |
-| `emails`              | Must be a comma separated list of valid email addresses.                                                         |
-| `minLength[number]`   | Must be at least X characters long.                                                                              |
-| `maxLength[number]`   | Must be no longer than X characters.                                                                             |
-| `exactLength[number]` | Must be exactly X characters long.                                                                               |
-| `greaterThan[number]` | Must be greater than X.                                                                                          |
-| `lessThan[number]`    | Must be less than X.                                                                                             |
-| `equals[number]`      | Must be equal to X.                                                                                              |
-| `alpha`               | Can only contain alphabetical characters (A-z).                                                                  |
-| `alphaNumeric`        | Can only contain alpha-numeric characters (A-z, 0-9).                                                            |
-| `alphaDash`           | Can only contain alpha-numeric characters, underscores, or dashes.                                               |
-| `numeric`             | Must be a whole (non-negative) number.                                                                           |
-| `integer`             | Must be an integer; either positive or negative.                                                                 |
-| `decimal`             | Must be a valid integer or decimal consist of two parts: an integer and a fraction separated by a decimal point. |
-| `ip`                  | Must be a valid IP address.                                                                                      |
-| `base64`              | Must be a base64 string.                                                                                         |
-| `phone`               | Must be a valid phone number.                                                                                    |
-| `cvc`                 | Must be a valid credit card cvc.                                                                                 |
-| `creditCard`          | Must be a valid credit card number.                                                                              |
-| `fileType[string]`    | Must be a comma separated list of file types e.g.: gif,png,jpg.                                                  |
-| `hasSpecialChar`      | Must contain a special character e.g.: $&+,:;=?@#\|'"<>.^\*()%!-.                                                |
-| `hasNumber`           | Must contain a number.                                                                                           |
-| `hasUpper`            | Must contain an upper case letter.                                                                               |
-| `hasLower`            | Must contain a lower case letter.                                                                                |
+| Name             | Message                                                                      | Descriptions                                               |
+| ---------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `required`       | '<em>%l</em> is required.'                                                   | 'Must not be empty.'                                       |
+| `matches`        | '<em>%l</em> must be the same as <em>%p</em>.'                               | 'Must match another field value.'                          |
+| `url`            | '<em>%l</em> must contain a valid url.'                                      | 'Must be a valid url.'                                     |
+| `email`          | '<em>%l</em> must contain a valid email address.'                            | 'Must be a valid email address.'                           |
+| `emails`         | '<em>%l</em> must contain all valid email addresses.'                        | 'Must be a comma separated list of valid email addresses.' |
+| `minLength`      | %l</em> must be at least <em>%p</em> characters in length.'                  |
+| `maxLength`      | %l</em> must not exceed <em>%p</em> characters in length.'                   |
+| `exactLength`    | %l</em> must be exactly <em>%p</em> characters in length.'                   |
+| `greaterThan`    | '<em>%l</em> must contain a number greater than <em>%p</em>.'                | 'Must be greater than X.'                                  |
+| `lessThan`       | '<em>%l</em> must contain a number less than <em>%p</em>.'                   | 'Must be less than X.'                                     |
+| `equals`         | '<em>%l</em> must be equal to <em>%p</em>.'                                  | 'Must be equal to X.'                                      |
+| `alpha`          | '<em>%l</em> must only contain alphabetical characters.'                     | 'Can only contain alphabetical characters (A-z).'          |
+| `alphaNumeric`   | '<em>%l</em> must only contain alpha-numeric characters.'                    | 'Can only contain alpha-numeric characters (A-z, 0-9).'    |
+| `alphaDash`      | %l</em> must only contain alpha-numeric characters, underscores and dashes.' |
+| `numeric`        | '<em>%l</em> must only contain a whole number.'                              | 'Must be a whole (non-negative) number.'                   |
+| `integer`        | '<em>%l</em> must be a number.'                                              | 'Must be an integer; either positive or negative.'         |
+| `decimal`        | '<em>%l</em> must contain a decimal number.'                                 |
+| `ip`             | '<em>%l</em> must contain a valid IP address.'                               | 'Must be a valid IP address.'                              |
+| `base64`         | '<em>%l</em> must contain a base64 string.'                                  | 'Must be a base64 string.'                                 |
+| `phone`          | '<em>%l</em> must contain a valid phone number.'                             | 'Must be a valid phone number.'                            |
+| `cvc`            | '<em>%l</em> must contain a valid CVC.'                                      | 'Must be a valid credit card cvc.'                         |
+| `creditCard`     | '<em>%l</em> must contain a valid credit card number.'                       | 'Must be a valid credit card number.'                      |
+| `fileType`       | '<em>%l</em> must contain only <em>%p</em> files.'                           |
+| `hasSpecialChar` | %l</em> must contain at least one special character e.g.: $&+,:;=?@#         | \'"<>.^\*()%!\_-'                                          |
+| `hasNumber`      | '<em>%l</em> must contain at least one number.'                              | 'Must contain a number.'                                   |
+| `hasUpper`       | '<em>%l</em> must contain at least one upper case letter.'                   | 'Must contain an upper case letter.'                       |
+| `hasLower`       | '<em>%l</em> must contain at least one lower case letter.'                   | 'Must contain a lower case letter.'                        |
 
 ### Transform image
 
