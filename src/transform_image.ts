@@ -46,7 +46,7 @@ const ROOT_URL = 'https://media.surveyplanet.com';
  * @function transformImage
  * @param url {string} - The url of the image to transform
  * @param options {TransformOptions} - The image transform options
- * @param options.background {string} -	Adjusts the backfill color of an image that has been resized and scaled to fit the new dimensions, usually when resize is set to f_contain. Value should be in the form of hex string e.g.: bg_ff00ff.
+ * @param options.background {string} -	Adjusts the backfill color of an image that has been resized and scaled to fit the new dimensions, usually when resize is set to contain. Value should be in the form of hex string e.g.: ff00ff.
  * @param options.blur {number} -	Blur the image.
  * @param options.fit {'cover' | 'contain' | 'fill' | 'inside' | 'outside'} -	The possible methods by which the image should fit width and height. Both width and height must be present. See fit details below.
  * cover: (default) Preserving aspect ratio, ensure the image covers both provided dimensions by cropping/clipping to fit.

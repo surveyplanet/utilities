@@ -25,4 +25,10 @@ describe('titleize', () => {
 	it('should handle strings with numbers', () => {
 		expect(titleize('123hello')).toBe('123hello');
 	});
+
+	it('should ensure all other words are lowercase', () => {
+		expect(titleize('Thank yoU And GOODNIGHT!')).toBe(
+			'Thank you and goodnight!'
+		);
+	});
 });
