@@ -27,8 +27,18 @@ describe('titleize', () => {
 	});
 
 	it('should ensure all other words are lowercase', () => {
-		expect(titleize('Thank yoU And GOODNIGHT!')).toBe(
+		expect(titleize('Thank yoU And GOODnIGHT!')).toBe(
 			'Thank you and goodnight!'
+		);
+	});
+
+	it('should not lowercase acronym', () => {
+		expect(titleize('NPS Survey')).toBe('NPS survey');
+	});
+
+	it('should not lowercase acronym as second word', () => {
+		expect(titleize('surveys That aRe like NPS Surveys')).toBe(
+			'Surveys that are like NPS surveys'
 		);
 	});
 });
