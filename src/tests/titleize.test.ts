@@ -41,4 +41,32 @@ describe('titleize', () => {
 			'Surveys that are like NPS surveys'
 		);
 	});
+
+	// it.skip('should capitalize the first word after a colon', () => {
+	// 	expect(titleize('section one: important details')).toBe(
+	// 		'Section one: Important details'
+	// 	);
+	// });
+
+	// it.skip('should capitalize the first word after a colon while preserving acronyms', () => {
+	// 	expect(titleize('note: the NPS survey results')).toBe(
+	// 		'Note: The NPS survey results'
+	// 	);
+	// });
+
+	// it.skip('should handle colons at the end of acronyms', () => {
+	// 	expect(titleize('FAQ: frequently asked questions')).toBe(
+	// 		'FAQ: Frequently asked questions'
+	// 	);
+	// });
+
+	// it.skip('should handle multiple colons in a single string', () => {
+	// 	expect(
+	// 		titleize('categories: primary: red, blue secondary: green')
+	// 	).toBe('Categories: Primary: Red, blue secondary: Green');
+	// });
+
+	// it.skip('should handle a string starting with a colon', () => {
+	// 	expect(titleize(': starting with colon')).toBe(': Starting with colon');
+	// });
 });

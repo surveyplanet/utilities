@@ -21,6 +21,7 @@ export { once } from './once';
 export { session } from './session';
 export { smartSort } from './smart_sort';
 export { stringToDate } from './string_to_date';
+export { truncate, type TruncateOptions } from './truncate';
 export { titleize } from './titleize';
 export { transformImage, type TransformOptions } from './transform_image';
 export { uniqueId } from './unique_id';

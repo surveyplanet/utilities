@@ -1,7 +1,12 @@
 /**
- * Capitalize the first letter of a given string.
+ * Capitalize the first letter of a given string. This is intended to satisfy the
+ * Microsoft style guide sentence-style casing, that is, only capitalize the
+ * first word of a title, like at the beginning of a sentence.
  *
  * @function titleize
+ * @see https://learn.microsoft.com/en-us/style-guide/capitalization#sentence-style-capitalization-in-titles-and-headings
+ * @todo If string includes a colon, capitalize the first word after it. e.g.:
+ * "Section one: Important details". This will make this function much more complex
  * @returns {string}
  */
 export const titleize = (str: string): string => {
