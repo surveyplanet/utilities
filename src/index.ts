@@ -25,6 +25,7 @@ export { truncate, type TruncateOptions } from './truncate';
 export { titleize } from './titleize';
 export { transformImage, type TransformOptions } from './transform_image';
 export { uniqueId } from './unique_id';
+export { scrollIntoViewIfNeeded } from './scroll_into_view_if_needed';
 export {
 	validate,
 	validateAll,
