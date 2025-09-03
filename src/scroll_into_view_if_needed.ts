@@ -8,7 +8,7 @@ interface ElementWithScrollIntoViewIfNeeded extends Element {
 /**
  * Scrolls an element into view only if it's not already visible in the viewport.
  * Uses the native scrollIntoViewIfNeeded implementation if available, otherwise falls back
- * to a custom implementation.
+ * to a custom implementation. The fallback uses the standard scrollIntoViewIfNeeded method.
  *
  * @param element - The DOM element to scroll into view if needed
  * @param options - Optional ScrollIntoViewOptions object to customize the scrolling behavior
