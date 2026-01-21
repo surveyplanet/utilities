@@ -25,7 +25,7 @@ export const hasLocalStorage = (): boolean => {
 		} else {
 			return false; // localStorage is disabled
 		}
-	} catch (e) {
+	} catch {
 		return false; // localStorage is disabled
 	}
 };

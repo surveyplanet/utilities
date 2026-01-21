@@ -8,7 +8,12 @@
 		"strict": true,
 		"strictNullChecks": true,
 		"target": "es2018",
-		"types": ["vitest/globals"]
+		"types": ["vitest/globals", "node"],
+		"lib": [
+			"ES2020",
+			"DOM",
+			"DOM.Iterable",
+		]
 	},
 	"include": ["src"],
 	"exclude": ["node_modules", "src/tests"]

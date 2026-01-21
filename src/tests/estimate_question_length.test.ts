@@ -1,5 +1,6 @@
-import { type Question, fixtures } from '@surveyplanet/types';
+import { type Question } from '@surveyplanet/types';
 
+import fixtures from '@surveyplanet/types/fixtures';
 import { expect, test, describe } from 'vitest';
 import { estimateQuestionLength } from '../index';
 
