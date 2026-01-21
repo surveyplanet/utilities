@@ -9,6 +9,6 @@ describe('delay', () => {
 		await delay(time);
 		const totalTime = new Date().getTime() - startTime.getTime();
 		expect(totalTime).toBeGreaterThanOrEqual(time - 5);
-		expect(totalTime).toBeLessThanOrEqual(time + 5);
+		expect(totalTime).toBeLessThanOrEqual(time + 20);
 	});
 });

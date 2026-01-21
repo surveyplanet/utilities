@@ -10,7 +10,7 @@ export const cloneDeep = <T>(input: T): T => {
 
 	try {
 		cloned = structuredClone(input);
-	} catch (e) {
+	} catch {
 		cloned = JSON.parse(JSON.stringify(input)) as T;
 	}
 

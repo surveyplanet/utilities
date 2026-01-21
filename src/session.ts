@@ -20,7 +20,7 @@ function available(): boolean {
 		} else {
 			return false;
 		}
-	} catch (e) {
+	} catch {
 		return false;
 	}
 }
@@ -65,7 +65,7 @@ function get<T, D extends T | undefined = undefined>(
 
 	try {
 		return JSON.parse(value) as T;
-	} catch (error) {
+	} catch {
 		return (defaultVal ?? null) as D extends undefined ? T | null : T;
 	}
 }
