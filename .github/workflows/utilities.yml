@@ -9,16 +9,22 @@ jobs:
     utilities:
         runs-on: ubuntu-latest
 
+        permissions:
+            id-token: write # Required for NPM Trusted Publishing
+            contents: write # Required for creating tags/releases
+            issues: write # Required for commenting on issues
+            pull-requests: write # Required for commenting on PRs
+
         concurrency:
             group: ${{ github.ref }}
             cancel-in-progress: true
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
 
-            - uses: actions/setup-node@v4
+            - uses: actions/setup-node@v6
               with:
-                  node-version: 21
+                  node-version: 24
 
             - name: Install packages
               run: |
@@ -49,5 +55,4 @@ jobs:
             - name: Release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
               run: npm run release
