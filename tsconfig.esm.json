@@ -1,8 +1,0 @@
-{
-	"extends": "./tsconfig.json",
-	"compilerOptions": {
-		"target": "esnext", // Use latest ECMAScript features
-		"module": "esnext", // Use ES modules
-		"outDir": "./dist/esm"
-	}
-}

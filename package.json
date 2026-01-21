@@ -3,9 +3,9 @@
 	"version": "0.0.0",
 	"license": "UNLICENSED",
 	"homepage": "https://github.com/surveyplanet/utilities",
-	"main": "./dist/cjs/index.js",
-	"module": "./dist/esm/index.js",
-	"types": "./dist/cjs/index.d.ts",
+	"type": "module",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:surveyplanet/utilities.git"
@@ -18,10 +18,8 @@
 		"dist"
 	],
 	"scripts": {
-		"build:cjs": "tsc --project tsconfig.cjs.json",
-		"build:esm": "tsc --project tsconfig.esm.json",
-		"build": "rm -rf dist && npm run build:cjs && npm run build:esm",
-		"clean": "rm -rf dist coverage .nyc_output",
+		"build": "rm -rf dist && tsc",
+		"clean": "rm -rf dist coverage",
 		"format": "prettier \"src/**/*.ts\" --check",
 		"lint": "eslint src",
 		"check": "./bin/preflight.sh",
@@ -48,7 +46,6 @@
 		"@typescript-eslint/parser": "^8.53.1",
 		"@vitest/coverage-v8": "^4.0.17",
 		"cspell": "^9.6.0",
-		"esbuild": "^0.27.2",
 		"eslint": "^9.39.2",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-import-resolver-typescript": "^4.4.4",
