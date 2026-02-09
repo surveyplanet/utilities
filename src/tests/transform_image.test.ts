@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { transformImage, type TransformOptions } from '../index';
+import { transformImage, type TransformOptions } from '../index.js';
 
 const ROOT_URL = 'https://media.surveyplanet.com';
 const TEST_IMG = `${ROOT_URL}/testing/default`;

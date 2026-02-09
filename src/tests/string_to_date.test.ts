@@ -1,7 +1,7 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { test, expect, describe } from 'vitest';
-import { stringToDate } from '../index';
+import { stringToDate } from '../index.js';
 
 describe('stringToDate', () => {
 	function toISOFormat(localeString: string): string {

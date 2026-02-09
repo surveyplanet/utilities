@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { once } from '../index';
+import { once } from '../index.js';
 
 describe('once', () => {
 	it('should call the function only once', () => {

@@ -1,5 +1,5 @@
 import { test, expect, describe } from 'vitest';
-import { dateToString } from '../index';
+import { dateToString } from '../index.js';
 
 describe('dateToString', () => {
 	const year = 2024;

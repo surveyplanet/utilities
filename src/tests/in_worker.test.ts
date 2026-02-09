@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import { inWorker } from '../index';
+import { inWorker } from '../index.js';
 
 describe('inWorker', () => {
 	it('should confirm test is not in a web worker', () => {

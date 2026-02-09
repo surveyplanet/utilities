@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
-import { locals } from '../index';
+import { locals } from '../index.js';
 
 describe('locals', () => {
 	const testKey = 'string';

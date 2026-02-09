@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import { inNode } from '../index';
+import { inNode } from '../index.js';
 
 describe('inNode', () => {
 	it('should confirm test is running in Node.js', () => {

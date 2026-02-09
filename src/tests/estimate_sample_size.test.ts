@@ -1,6 +1,6 @@
 import { expect, test, describe } from 'vitest';
 
-import { estimateSampleSize } from '../index';
+import { estimateSampleSize } from '../index.js';
 
 describe('Estimate sample size', function () {
 	test('should estimate sample size with a 10% margin of error', function () {

@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import { uniqueId } from '../index';
+import { uniqueId } from '../index.js';
 
 describe('uniqueId', () => {
 	it('should generate a unique id', () => {

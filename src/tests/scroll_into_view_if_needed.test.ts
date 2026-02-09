@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { scrollIntoViewIfNeeded } from '../scroll_into_view_if_needed';
+import { scrollIntoViewIfNeeded } from '../index.js';
 
 // Define interface for testing purposes
 interface ElementWithScrollIntoViewIfNeeded extends Element {

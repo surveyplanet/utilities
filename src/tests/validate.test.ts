@@ -4,16 +4,18 @@ import { describe, expect, it, beforeAll } from 'vitest';
 import {
 	validate,
 	validateAll,
+	renderValidationError,
+	removeAllValidationErrors,
+} from '../index.js';
+import {
 	RULES,
 	parseRule,
 	getRule,
 	parseValidationArgsFromInput,
 	parseValidationMessage,
-	renderValidationError,
-	removeAllValidationErrors,
 	getInputLabel,
-} from '../validate';
-import testData from './fixtures/validatorData';
+} from '../validate.js';
+import testData from './fixtures/validatorData.js';
 
 describe('Validator', () => {
 	describe('Utilities', () => {

@@ -1,6 +1,6 @@
 import { type ISODate } from '@surveyplanet/types';
 import { test, expect, describe } from 'vitest';
-import { humanizeDate } from '../index';
+import { humanizeDate } from '../index.js';
 
 describe('humanizeDate', () => {
 	const date = new Date(2024, 1, 15);

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isPlainObject } from '../index';
+import { isPlainObject } from '../index.js';
 
 describe('isPlainObject', () => {
 	it('should confirm value is a plain object', () => {

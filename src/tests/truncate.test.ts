@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { truncate } from '../';
+import { truncate } from '../index.js';
 
 describe('truncate', () => {
 	const testTxt =

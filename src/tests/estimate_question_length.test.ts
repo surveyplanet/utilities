@@ -2,7 +2,7 @@ import { type Question } from '@surveyplanet/types';
 
 import fixtures from '@surveyplanet/types/fixtures';
 import { expect, test, describe } from 'vitest';
-import { estimateQuestionLength } from '../index';
+import { estimateQuestionLength } from '../index.js';
 
 describe('Estimate question length', function () {
 	test('should estimate 0 if question is not provided', function () {

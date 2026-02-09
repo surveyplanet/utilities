@@ -1,6 +1,6 @@
 // insert.test.ts
 import { describe, it, expect } from 'vitest';
-import { insert } from '..';
+import { insert } from '../index.js';
 
 describe('insert', () => {
 	it('inserts an item at the beginning of an array', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isDate } from '../index';
+import { isDate } from '../index.js';
 
 describe('isDate', () => {
 	it('should confirm value is a date', () => {

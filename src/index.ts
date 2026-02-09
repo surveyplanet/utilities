@@ -1,31 +1,31 @@
-export { cloneDeep } from './clone_deep';
-export { dasherize } from './dasherize';
-export { dateToString } from './date_to_string';
+export { cloneDeep } from './clone_deep.js';
+export { dasherize } from './dasherize.js';
+export { dateToString } from './date_to_string.js';
 export { debounce, throttle } from 'throttle-debounce';
-export { delay } from './delay';
-export { estimateSampleSize } from './estimate_sample_size';
-export { estimateQuestionLength } from './estimate_question_length';
-export { get } from './get';
-export { hasLocalStorage } from './has_local_storage';
-export { humanizeDate } from './humanize_date';
-export { inBrowser } from './in_browser';
-export { inJsDom } from './in_jsdom';
-export { inNode } from './in_node';
-export { inWorker } from './in_worker';
-export { insert } from './insert';
-export { isDate } from './is_date';
-export { isPlainObject } from './is_plain_object';
-export { locals } from './locals';
-export { omitProps } from './omit_props';
-export { once } from './once';
-export { session } from './session';
-export { smartSort } from './smart_sort';
-export { stringToDate } from './string_to_date';
-export { truncate, type TruncateOptions } from './truncate';
-export { titleize } from './titleize';
-export { transformImage, type TransformOptions } from './transform_image';
-export { uniqueId } from './unique_id';
-export { scrollIntoViewIfNeeded } from './scroll_into_view_if_needed';
+export { delay } from './delay.js';
+export { estimateSampleSize } from './estimate_sample_size.js';
+export { estimateQuestionLength } from './estimate_question_length.js';
+export { get } from './get.js';
+export { hasLocalStorage } from './has_local_storage.js';
+export { humanizeDate } from './humanize_date.js';
+export { inBrowser } from './in_browser.js';
+export { inJsDom } from './in_jsdom.js';
+export { inNode } from './in_node.js';
+export { inWorker } from './in_worker.js';
+export { insert } from './insert.js';
+export { isDate } from './is_date.js';
+export { isPlainObject } from './is_plain_object.js';
+export { locals } from './locals.js';
+export { omitProps } from './omit_props.js';
+export { once } from './once.js';
+export { session } from './session.js';
+export { smartSort } from './smart_sort.js';
+export { stringToDate } from './string_to_date.js';
+export { truncate, type TruncateOptions } from './truncate.js';
+export { titleize } from './titleize.js';
+export { transformImage, type TransformOptions } from './transform_image.js';
+export { uniqueId } from './unique_id.js';
+export { scrollIntoViewIfNeeded } from './scroll_into_view_if_needed.js';
 export {
 	validate,
 	validateAll,
@@ -33,4 +33,4 @@ export {
 	removeAllValidationErrors,
 	type ValidatorError,
 	type ValidateArgs,
-} from './validate';
+} from './validate.js';

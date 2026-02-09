@@ -1,5 +1,5 @@
 import { vi, describe, it, expect, expectTypeOf } from 'vitest';
-import { smartSort } from '../index';
+import { smartSort } from '../index.js';
 
 describe('smartSort', () => {
 	// Test data

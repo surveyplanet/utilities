@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import { dasherize } from '../index';
+import { dasherize } from '../index.js';
 
 describe('dasherize', () => {
 	it('should replace all spaces in string to dashes', () => {

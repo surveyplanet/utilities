@@ -2,16 +2,16 @@
 	"compilerOptions": {
 		"declaration": true,
 		"esModuleInterop": true,
-		"module": "esnext",
-		"moduleResolution": "bundler",
 		"outDir": "./dist",
 		"skipLibCheck": true,
 		"strict": true,
 		"strictNullChecks": true,
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
 		"target": "esnext",
 		"types": ["vitest/globals", "node"],
-		"lib": ["ES2020", "DOM", "DOM.Iterable"]
+		"lib": ["ES2020", "DOM", "DOM.Iterable"],
 	},
 	"include": ["src"],
-	"exclude": ["node_modules", "src/tests"]
+	"exclude": ["node_modules", "src/tests"],
 }

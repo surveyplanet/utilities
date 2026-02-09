@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import { delay } from '../index';
+import { delay } from '../index.js';
 
 describe('delay', () => {
 	it('should delay the call stack', async () => {

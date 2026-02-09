@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { omitProps } from '../index';
+import { omitProps } from '../index.js';
 
 describe('omitProps', () => {
 	const user = {

@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import { session } from '../index';
+import { session } from '../index.js';
 
 describe('session', () => {
 	const testKey = 'string';

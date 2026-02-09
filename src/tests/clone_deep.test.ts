@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cloneDeep } from '../index';
+import { cloneDeep } from '../index.js';
 
 describe('cloneDeep', () => {
 	it('should deep clone an object', () => {
