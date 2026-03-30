@@ -20,6 +20,7 @@ export { isPlainObject } from './is_plain_object.js';
 export { locals } from './locals.js';
 export { omitProps } from './omit_props.js';
 export { once } from './once.js';
+export { ordinalSuffix } from './ordinal_suffix.js';
 export { session } from './session.js';
 export { smartSort } from './smart_sort.js';
 export { stringToDate } from './string_to_date.js';

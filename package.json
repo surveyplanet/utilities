@@ -38,6 +38,7 @@
 		"./locals": "./dist/locals.js",
 		"./omit_props": "./dist/omit_props.js",
 		"./once": "./dist/once.js",
+		"./ordinal_suffix": "./dist/ordinal_suffix.js",
 		"./session": "./dist/session.js",
 		"./smart_sort": "./dist/smart_sort.js",
 		"./string_to_date": "./dist/string_to_date.js",
