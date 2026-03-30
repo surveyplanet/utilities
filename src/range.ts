@@ -26,7 +26,11 @@
  * // Inclusive descending range
  * range(5, 1, true); // [5, 4, 3, 2, 1]
  */
-export function range(start: number, end: number, inclusive: boolean = false): number[] {
+export function range(
+	start: number,
+	end: number,
+	inclusive: boolean = false
+): number[] {
 	const results: number[] = [];
 	const ascending: boolean = start < end;
 
@@ -34,8 +38,8 @@ export function range(start: number, end: number, inclusive: boolean = false): n
 		end = ascending ? end + 1 : end - 1;
 	}
 
-	const condition = (i: number): boolean => ascending ? i < end : i > end;
-	const step = (i: number): number => ascending ? i + 1 : i - 1;
+	const condition = (i: number): boolean => (ascending ? i < end : i > end);
+	const step = (i: number): number => (ascending ? i + 1 : i - 1);
 
 	for (let i: number = start; condition(i); i = step(i)) {
 		results.push(i);
