@@ -1,6 +1,7 @@
 export { cloneDeep } from './clone_deep.js';
 export { dasherize } from './dasherize.js';
 export { dateToString } from './date_to_string.js';
+export { debounce } from './debounce.js';
 export { delay } from './delay.js';
 export { estimateSampleSize } from './estimate_sample_size.js';
 export { parseDuration } from './parse_duration.js';
@@ -24,6 +25,7 @@ export { ordinalSuffix } from './ordinal_suffix.js';
 export { session } from './session.js';
 export { smartSort } from './smart_sort.js';
 export { stringToDate } from './string_to_date.js';
+export { throttle } from './throttle.js';
 export { truncate, type TruncateOptions } from './truncate.js';
 export { titleize } from './titleize.js';
 export { transformImage, type TransformOptions } from './transform_image.js';

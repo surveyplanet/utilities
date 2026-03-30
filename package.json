@@ -20,9 +20,8 @@
 		"./date_to_string": "./dist/date_to_string.js",
 		"./debounce": "./dist/debounce.js",
 		"./delay": "./dist/delay.js",
-		"./estimate_sample_size": "./dist/estimate_sample_size.js",
-		"./parse_duration": "./dist/parse_duration.js",
 		"./estimate_question_length": "./dist/estimate_question_length.js",
+		"./estimate_sample_size": "./dist/estimate_sample_size.js",
 		"./get": "./dist/get.js",
 		"./has_local_storage": "./dist/has_local_storage.js",
 		"./humanize_date": "./dist/humanize_date.js",
@@ -30,8 +29,6 @@
 		"./in_jsdom": "./dist/in_jsdom.js",
 		"./in_node": "./dist/in_node.js",
 		"./in_worker": "./dist/in_worker.js",
-		"./parse_date": "./dist/parse_date.js",
-		"./range": "./dist/range.js",
 		"./insert": "./dist/insert.js",
 		"./is_date": "./dist/is_date.js",
 		"./is_plain_object": "./dist/is_plain_object.js",
@@ -39,14 +36,18 @@
 		"./omit_props": "./dist/omit_props.js",
 		"./once": "./dist/once.js",
 		"./ordinal_suffix": "./dist/ordinal_suffix.js",
+		"./parse_date": "./dist/parse_date.js",
+		"./parse_duration": "./dist/parse_duration.js",
+		"./range": "./dist/range.js",
+		"./scroll_into_view_if_needed": "./dist/scroll_into_view_if_needed.js",
 		"./session": "./dist/session.js",
 		"./smart_sort": "./dist/smart_sort.js",
 		"./string_to_date": "./dist/string_to_date.js",
-		"./truncate": "./dist/truncate.js",
+		"./throttle": "./dist/throttle.js",
 		"./titleize": "./dist/titleize.js",
 		"./transform_image": "./dist/transform_image.js",
+		"./truncate": "./dist/truncate.js",
 		"./unique_id": "./dist/unique_id.js",
-		"./scroll_into_view_if_needed": "./dist/scroll_into_view_if_needed.js",
 		"./validate": "./dist/validate.js"
 	},
 	"scripts": {
@@ -88,5 +89,8 @@
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.57.2",
 		"vitest": "^4.1.2"
+	},
+	"dependencies": {
+		"throttle-debounce": "^5.0.2"
 	}
 }
