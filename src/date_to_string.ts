@@ -9,10 +9,7 @@ export const dateToString = (
 	value: string | Date,
 	type: 'date' | 'time' | 'datetime-local' = 'datetime-local'
 ): string | undefined => {
-	if (
-		!(value instanceof Date) &&
-		(typeof value !== 'string' || isNaN(Date.parse(value)))
-	) {
+	if (!(value instanceof Date) && (typeof value !== 'string' || isNaN(Date.parse(value)))) {
 		return;
 	}
 
@@ -44,11 +41,7 @@ export const dateToString = (
 		case 'time':
 			return isoString.split('T')[1].slice(0, 5); // Only return HH:mm
 		case 'datetime-local':
-			return (
-				isoString.split('T')[0] +
-				'T' +
-				isoString.split('T')[1].slice(0, 5)
-			); // Include date and HH:mm
+			return isoString.split('T')[0] + 'T' + isoString.split('T')[1].slice(0, 5); // Include date and HH:mm
 		default:
 			throw new Error('Invalid type specified');
 	}

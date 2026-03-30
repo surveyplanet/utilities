@@ -6,5 +6,4 @@
  * @returns {Boolean}
  */
 export const inWorker =
-	typeof self === 'object' &&
-	self.constructor.name === 'DedicatedWorkerGlobalScope';
+	typeof self === 'object' && self.constructor.name === 'DedicatedWorkerGlobalScope';

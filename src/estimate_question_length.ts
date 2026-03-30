@@ -1,17 +1,11 @@
-import type {
-	Question,
-	QuestionType,
-	QuestionProperties,
-} from '@surveyplanet/types';
+import type { Question, QuestionType, QuestionProperties } from '@surveyplanet/types';
 
 /**
  * Estimates the time in seconds it would take to answer a question
  * @param question The question to estimate the time for
  * @returns Time in seconds
  */
-export function estimateQuestionLength(
-	question?: Partial<Question<QuestionType>>
-): number {
+export function estimateQuestionLength(question?: Partial<Question<QuestionType>>): number {
 	if (!question) {
 		return 0;
 	}
@@ -24,8 +18,7 @@ export function estimateQuestionLength(
 
 	// Handle each question type
 	if (question.type === 'multiple_choice') {
-		const props =
-			question.properties as QuestionProperties<'multiple_choice'>;
+		const props = question.properties as QuestionProperties<'multiple_choice'>;
 		if (props.multi) {
 			// 1 point for every 2 options
 			score = Math.round(props.labels.length / 2);

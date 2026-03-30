@@ -52,7 +52,6 @@ describe('once', () => {
 	});
 
 	it('should work with async functions', async () => {
-		// eslint-disable-next-line @typescript-eslint/require-await
 		const mockFn = vi.fn(async () => 'async result');
 		const onceFn = once(mockFn);
 

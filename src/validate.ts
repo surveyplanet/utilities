@@ -1,6 +1,4 @@
-export type CheckRadioInputElement =
-	| (HTMLInputElement & { type: 'radio' })
-	| { type: 'checkbox' }; // Union type for radio and checkbox
+export type CheckRadioInputElement = (HTMLInputElement & { type: 'radio' }) | { type: 'checkbox' }; // Union type for radio and checkbox
 
 export type FormControl = HTMLInputElement | HTMLSelectElement; //| CheckRadioInputElement;
 
@@ -159,8 +157,7 @@ export const RULES: ValidatorRule[] = [
 	},
 	{
 		name: 'minLength',
-		message:
-			'<em>%l</em> must be at least <em>%p</em> characters in length.',
+		message: '<em>%l</em> must be at least <em>%p</em> characters in length.',
 		description: 'Must be at least X characters long.',
 		parameterRequired: true,
 		hook: (value, param) => {
@@ -172,8 +169,7 @@ export const RULES: ValidatorRule[] = [
 	},
 	{
 		name: 'maxLength',
-		message:
-			'<em>%l</em> must not exceed <em>%p</em> characters in length.',
+		message: '<em>%l</em> must not exceed <em>%p</em> characters in length.',
 		description: 'Must be no longer than X characters.',
 		parameterRequired: true,
 		hook: (value, param) => {
@@ -185,8 +181,7 @@ export const RULES: ValidatorRule[] = [
 	},
 	{
 		name: 'exactLength',
-		message:
-			'<em>%l</em> must be exactly <em>%p</em> characters in length.',
+		message: '<em>%l</em> must be exactly <em>%p</em> characters in length.',
 		description: 'Must be exactly X characters long.',
 		parameterRequired: true,
 		hook: (value, param) => {
@@ -249,10 +244,8 @@ export const RULES: ValidatorRule[] = [
 	},
 	{
 		name: 'alphaDash',
-		message:
-			'<em>%l</em> must only contain alpha-numeric characters, underscores and dashes.',
-		description:
-			'Can only contain alpha-numeric characters, underscores, or dashes.',
+		message: '<em>%l</em> must only contain alpha-numeric characters, underscores and dashes.',
+		description: 'Can only contain alpha-numeric characters, underscores, or dashes.',
 		parameterRequired: false,
 		hook: (value) => {
 			return REGEXP.alphaDash.test(value);
@@ -321,9 +314,7 @@ export const RULES: ValidatorRule[] = [
 		description: 'Must be a valid credit card cvc.',
 		parameterRequired: false,
 		hook: (value) => {
-			return (
-				/^\d+$/.test(value) && value.length >= 3 && value.length <= 4
-			);
+			return /^\d+$/.test(value) && value.length >= 3 && value.length <= 4;
 		},
 	},
 	{
@@ -337,14 +328,14 @@ export const RULES: ValidatorRule[] = [
 			}
 
 			let nCheck = 0;
-			let nDigit = 0;
 			let bEven = false;
 			const strippedField = value.replace(/\D/g, '');
 			let n = strippedField.length - 1;
 
 			while (n >= 0) {
 				const cDigit = strippedField.charAt(n);
-				nDigit = parseInt(cDigit, 10);
+				let nDigit = parseInt(cDigit, 10);
+
 				if (bEven) {
 					if ((nDigit *= 2) > 9) {
 						nDigit -= 9;
@@ -360,8 +351,7 @@ export const RULES: ValidatorRule[] = [
 	{
 		name: 'fileType',
 		message: '<em>%l</em> must contain only <em>%p</em> files.',
-		description:
-			'Must be a comma separated list of file types e.g.: gif,png,jpg.',
+		description: 'Must be a comma separated list of file types e.g.: gif,png,jpg.',
 		parameterRequired: true,
 		hook: (value, param) => {
 			if (typeof param !== 'string') return false;
@@ -379,8 +369,7 @@ export const RULES: ValidatorRule[] = [
 		name: 'hasSpecialChar',
 		message:
 			'<em>%l</em> must contain at least one special character e.g.: $&+,:;=?@#|\'"<>.^*()%!_-',
-		description:
-			'Must contain a special character e.g.: $&+,:;=?@#|\'"<>.^*()%!-.',
+		description: 'Must contain a special character e.g.: $&+,:;=?@#|\'"<>.^*()%!-.',
 		parameterRequired: false,
 		hook: (value) => {
 			return REGEXP.hasSpecialChar.test(value);
@@ -464,9 +453,7 @@ export function validateAll(options: ValidateArgs[]): ValidatorError[] {
  *   data-validate-show-errors />
  */
 
-export const validate = (
-	options: ValidateArgs | ValidateArgs[]
-): ValidatorError[] => {
+export const validate = (options: ValidateArgs | ValidateArgs[]): ValidatorError[] => {
 	const errors: ValidatorError[] = [];
 
 	if (Array.isArray(options)) {
@@ -474,8 +461,7 @@ export const validate = (
 	}
 
 	// HTMLInputElement and HTMLSelectElement are both instanceof Element
-	const isInputElement =
-		typeof Element !== 'undefined' && options.value instanceof Element;
+	const isInputElement = typeof Element !== 'undefined' && options.value instanceof Element;
 
 	if (isInputElement) {
 		options = parseValidationArgsFromInput(options);
@@ -536,9 +522,7 @@ export const validate = (
  * @param {ValidateArgs} input The input or input id that errored.
  * @return {ValidateArgs}
  */
-export function parseValidationArgsFromInput(
-	input: ValidateArgs
-): ValidateArgs {
+export function parseValidationArgsFromInput(input: ValidateArgs): ValidateArgs {
 	const inputEl = input.value as HTMLInputElement;
 	const inputData = inputEl.dataset;
 
@@ -551,9 +535,7 @@ export function parseValidationArgsFromInput(
 		throw new Error('Input must use "data-validate-rules" attribute');
 	}
 
-	const ruleData = inputData.validateRules
-		.split(',')
-		.map((rule) => rule.trim());
+	const ruleData = inputData.validateRules.split(',').map((rule) => rule.trim());
 
 	if (!ruleData.length) {
 		throw new Error('Input must use "data-validate-rules" attribute');
@@ -592,9 +574,7 @@ export function getInputLabel(input: FormControl | string): string {
 		input = document.getElementById(input) as FormControl;
 	}
 
-	const label = document.querySelector<HTMLLabelElement>(
-		`label[for="${input.id}"]`
-	);
+	const label = document.querySelector<HTMLLabelElement>(`label[for="${input.id}"]`);
 
 	let labelText = '';
 
@@ -637,10 +617,7 @@ export function renderValidationError(
 	label.className = 'validation-error-message';
 	label.setAttribute('for', input.id);
 	label.innerHTML = error;
-	input.insertAdjacentElement(
-		position === 'before' ? 'beforebegin' : 'afterend',
-		label
-	);
+	input.insertAdjacentElement(position === 'before' ? 'beforebegin' : 'afterend', label);
 }
 
 /**
@@ -655,9 +632,7 @@ export function removeAllValidationErrors(): void {
 		input.classList.remove('validation-error');
 	}
 
-	const messages = document.getElementsByClassName(
-		'validation-error-message'
-	);
+	const messages = document.getElementsByClassName('validation-error-message');
 
 	for (const message of messages) {
 		message.parentNode?.removeChild(message);
@@ -690,9 +665,7 @@ export const parseRule = (str: string): ValidateArgsRule => {
  * @param {String} rule name of rule to find
  * @return {ValidatorRule | undefined}
  */
-export function getRule(
-	name: (typeof RULES)[number]['name']
-): ValidatorRule | undefined {
+export function getRule(name: (typeof RULES)[number]['name']): ValidatorRule | undefined {
 	return RULES.find((rule) => rule.name === name);
 }
 

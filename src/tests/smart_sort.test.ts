@@ -96,41 +96,23 @@ describe('smartSort', () => {
 	it('should sort dates in ascending order', () => {
 		const result = smartSort(users, 'created');
 		expect(result[0].created).toBe(null);
-		expect(result[1].created?.getTime()).toBe(
-			new Date('2022-11-05').getTime()
-		);
-		expect(result[2].created?.getTime()).toBe(
-			new Date('2023-01-15').getTime()
-		);
-		expect(result[3].created?.getTime()).toBe(
-			new Date('2023-03-20').getTime()
-		);
-		expect(result[4].created?.getTime()).toBe(
-			new Date('2023-05-10').getTime()
-		);
+		expect(result[1].created?.getTime()).toBe(new Date('2022-11-05').getTime());
+		expect(result[2].created?.getTime()).toBe(new Date('2023-01-15').getTime());
+		expect(result[3].created?.getTime()).toBe(new Date('2023-03-20').getTime());
+		expect(result[4].created?.getTime()).toBe(new Date('2023-05-10').getTime());
 	});
 
 	it('should sort dates in descending order', () => {
 		const result = smartSort(users, 'created', false);
-		expect(result[0].created?.getTime()).toBe(
-			new Date('2023-05-10').getTime()
-		);
-		expect(result[1].created?.getTime()).toBe(
-			new Date('2023-03-20').getTime()
-		);
-		expect(result[2].created?.getTime()).toBe(
-			new Date('2023-01-15').getTime()
-		);
-		expect(result[3].created?.getTime()).toBe(
-			new Date('2022-11-05').getTime()
-		);
+		expect(result[0].created?.getTime()).toBe(new Date('2023-05-10').getTime());
+		expect(result[1].created?.getTime()).toBe(new Date('2023-03-20').getTime());
+		expect(result[2].created?.getTime()).toBe(new Date('2023-01-15').getTime());
+		expect(result[3].created?.getTime()).toBe(new Date('2022-11-05').getTime());
 		expect(result[4].created).toBe(null);
 	});
 
 	it('should use custom comparison function when provided', () => {
-		const mockComparator = vi.fn(
-			(a, b) => String(a).length - String(b).length
-		);
+		const mockComparator = vi.fn((a, b) => String(a).length - String(b).length);
 		const result = smartSort(users, 'name', true, mockComparator);
 
 		expect(mockComparator).toHaveBeenCalled();

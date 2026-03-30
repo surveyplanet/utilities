@@ -8,8 +8,6 @@ describe('dasherize', () => {
 		expect(dasherize('johnnyAppleseed')).toBe('johnny-appleseed');
 		expect(dasherize('__---_--Johnny_-Appleseed')).toBe('johnny-appleseed');
 		expect(dasherize('Johnny Appleseed', '_')).toBe('johnny_appleseed');
-		expect(dasherize('__---_--Johnny_-Appleseed', '_')).toBe(
-			'johnny_appleseed'
-		);
+		expect(dasherize('__---_--Johnny_-Appleseed', '_')).toBe('johnny_appleseed');
 	});
 });

@@ -27,9 +27,7 @@ describe('titleize', () => {
 	});
 
 	it('should ensure all other words are lowercase', () => {
-		expect(titleize('Thank yoU And GOODnIGHT!')).toBe(
-			'Thank you and goodnight!'
-		);
+		expect(titleize('Thank yoU And GOODnIGHT!')).toBe('Thank you and goodnight!');
 	});
 
 	it('should not lowercase acronym', () => {

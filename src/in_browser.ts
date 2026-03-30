@@ -4,5 +4,4 @@
  * @name inWorker
  * @returns {Boolean}
  */
-export const inBrowser =
-	typeof window !== 'undefined' && typeof window.document !== 'undefined';
+export const inBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';

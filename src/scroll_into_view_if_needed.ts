@@ -33,8 +33,7 @@ export function scrollIntoViewIfNeeded(
 	const hasNativeMethod =
 		typeof element !== 'undefined' &&
 		'scrollIntoViewIfNeeded' in element &&
-		typeof (element as ElementWithScrollIntoViewIfNeeded)
-			.scrollIntoViewIfNeeded === 'function';
+		typeof (element as ElementWithScrollIntoViewIfNeeded).scrollIntoViewIfNeeded === 'function';
 
 	if (hasNativeMethod) {
 		// Call the native implementation with proper type cast

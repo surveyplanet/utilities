@@ -26,11 +26,7 @@
  * // Inclusive descending range
  * range(5, 1, true); // [5, 4, 3, 2, 1]
  */
-export function range(
-	start: number,
-	end: number,
-	inclusive: boolean = false
-): number[] {
+export function range(start: number, end: number, inclusive: boolean = false): number[] {
 	const results: number[] = [];
 	const ascending: boolean = start < end;
 

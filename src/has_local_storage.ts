@@ -10,9 +10,7 @@ const TEST_NAME = '__local_storage_test__';
 const TEST_VAL = 'yes';
 
 export const hasLocalStorage = (): boolean => {
-	console.warn(
-		'hasLocalStorage() is deprecated. Use locals.available() instead.'
-	);
+	console.warn('hasLocalStorage() is deprecated. Use locals.available() instead.');
 	if (typeof localStorage === 'undefined') {
 		return false; // localStorage is not available
 	}

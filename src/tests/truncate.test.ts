@@ -2,8 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { truncate } from '../index.js';
 
 describe('truncate', () => {
-	const testTxt =
-		'This is a very long text that needs to be truncated in different ways';
+	const testTxt = 'This is a very long text that needs to be truncated in different ways';
 
 	describe('End truncation', () => {
 		it('should truncate text at the end with default ellipsis', () => {

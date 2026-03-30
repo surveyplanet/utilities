@@ -10,9 +10,7 @@ describe('humanizeDate', () => {
 	});
 
 	test('should return date string from ISO date string', () => {
-		expect(humanizeDate(date.toISOString() as ISODate)).toBe(
-			'Feb 15, 2024'
-		);
+		expect(humanizeDate(date.toISOString() as ISODate)).toBe('Feb 15, 2024');
 	});
 	test('should return date string in arabic', () => {
 		expect(humanizeDate(date, {}, 'ar-EG')).toBe('١٥‏/٢‏/٢٠٢٤'); // cspell: disable-line
@@ -23,9 +21,7 @@ describe('humanizeDate', () => {
 			weekday: 'long',
 			month: 'long',
 		};
-		expect(humanizeDate(date, options, 'en-GB')).toBe(
-			'Thursday, 15 February 2024'
-		);
+		expect(humanizeDate(date, options, 'en-GB')).toBe('Thursday, 15 February 2024');
 	});
 	test('should return date string from in short format', () => {
 		const options: Intl.DateTimeFormatOptions = {
@@ -37,13 +33,9 @@ describe('humanizeDate', () => {
 	});
 
 	test('should return date string with time only', () => {
-		expect(humanizeDate(date, { timeOnly: true }, 'en-US')).toBe(
-			'12:00 AM'
-		);
+		expect(humanizeDate(date, { timeOnly: true }, 'en-US')).toBe('12:00 AM');
 	});
 	test('should return date string with full time', () => {
-		expect(humanizeDate(date, { full: true }, 'en-US')).toBe(
-			'Feb 15, 2024, 12:00 AM'
-		);
+		expect(humanizeDate(date, { full: true }, 'en-US')).toBe('Feb 15, 2024, 12:00 AM');
 	});
 });

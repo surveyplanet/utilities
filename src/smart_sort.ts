@@ -17,9 +17,7 @@ export function smartSort<T extends { [K in keyof T]: unknown }>(
 
 	return sortedData.sort((a, b) => {
 		if (comparator) {
-			return ascending
-				? comparator(a[key], b[key])
-				: comparator(b[key], a[key]);
+			return ascending ? comparator(a[key], b[key]) : comparator(b[key], a[key]);
 		}
 
 		// undefined or null
@@ -49,9 +47,7 @@ export function smartSort<T extends { [K in keyof T]: unknown }>(
 
 		// Booleans
 		if (typeof a[key] === 'boolean' && typeof b[key] === 'boolean') {
-			return ascending
-				? Number(a[key]) - Number(b[key])
-				: Number(b[key]) - Number(a[key]);
+			return ascending ? Number(a[key]) - Number(b[key]) : Number(b[key]) - Number(a[key]);
 		}
 
 		// Default (string)

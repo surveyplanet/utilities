@@ -6,6 +6,27 @@ type HumanizeDateFormat = Intl.DateTimeFormatOptions & {
 	full?: boolean;
 };
 
+/**
+ * Formats a date into a human-readable string representation.
+ *
+ * @param date - The date to format (ISO string or Date object).
+ * @param options - Formatting options to control the output style.
+ * @param local - The locale to use for formatting (defaults to 'en-US').
+ * @returns A formatted date string based on the provided options.
+ * @deprecated use `parseDate` instead.
+ *
+ * @example
+ * // Default format: "Jan 1, 2023"
+ * humanizeDate('2023-01-01T00:00:00Z');
+ *
+ * @example
+ * // Time-only format: "12:00 AM"
+ * humanizeDate('2023-01-01T00:00:00Z', { timeOnly: true });
+ *
+ * @example
+ * // Full format: "Jan 1, 2023, 12:00 AM"
+ * humanizeDate('2023-01-01T00:00:00Z', { full: true });
+ */
 export const humanizeDate = (
 	date: ISODate | Date,
 	options: HumanizeDateFormat = { default: true },

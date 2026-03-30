@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { range } from '../range.js';
+import { range } from '../index.js';
 
 describe('range', () => {
 	describe('ascending ranges', () => {

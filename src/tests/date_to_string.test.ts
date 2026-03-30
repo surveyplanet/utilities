@@ -9,43 +9,23 @@ describe('dateToString', () => {
 	const minutes = 30;
 	const seconds = 1;
 	const milliseconds = 0;
-	const date = new Date(
-		year,
-		month,
-		day,
-		hours,
-		minutes,
-		seconds,
-		milliseconds
-	);
+	const date = new Date(year, month, day, hours, minutes, seconds, milliseconds);
 
 	test('should return undefined when date is invalid', () => {
 		expect(dateToString('', 'datetime-local')).toBe(undefined);
 		expect(dateToString('noop', 'datetime-local')).toBe(undefined);
-		expect(dateToString(123 as unknown as string, 'datetime-local')).toBe(
-			undefined
-		);
-		expect(dateToString([123] as unknown as string, 'datetime-local')).toBe(
-			undefined
-		);
+		expect(dateToString(123 as unknown as string, 'datetime-local')).toBe(undefined);
+		expect(dateToString([123] as unknown as string, 'datetime-local')).toBe(undefined);
 
-		expect(dateToString(123456789 as unknown as string, 'date')).toBe(
-			undefined
-		);
+		expect(dateToString(123456789 as unknown as string, 'date')).toBe(undefined);
 		expect(dateToString(true as unknown as string, 'date')).toBe(undefined);
-		expect(
-			dateToString({ date: '2022-01-01' } as unknown as string, 'date')
-		).toBe(undefined);
+		expect(dateToString({ date: '2022-01-01' } as unknown as string, 'date')).toBe(undefined);
 		expect(dateToString(null as unknown as string, 'date')).toBe(undefined);
 		expect(dateToString('2022-13-01', 'date')).toBe(undefined);
 		expect(dateToString('2022-01-32', 'date')).toBe(undefined);
 		expect(dateToString('2022-01-01T25:00:00', 'date')).toBe(undefined);
-		expect(dateToString('2022-01-01T00:00:00+25:00', 'date')).toBe(
-			undefined
-		);
-		expect(dateToString('2022-01-01T00:00:00.000Z+00:00', 'date')).toBe(
-			undefined
-		);
+		expect(dateToString('2022-01-01T00:00:00+25:00', 'date')).toBe(undefined);
+		expect(dateToString('2022-01-01T00:00:00.000Z+00:00', 'date')).toBe(undefined);
 		// expect(dateToString('01/01/2022', 'date')).toBe(undefined);
 		// expect(dateToString('99999-01-01', 'date')).toBe(undefined);
 		// expect(dateToString('2022-01', 'date')).toBe(undefined);

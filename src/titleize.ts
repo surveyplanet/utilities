@@ -25,9 +25,7 @@ export const titleize = (str: string): string => {
 
 			// First word gets capitalized, all others lowercase
 			if (index === 0) {
-				return (
-					word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-				);
+				return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 			} else {
 				return word.toLowerCase();
 			}

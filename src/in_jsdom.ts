@@ -8,5 +8,4 @@
 export const inJsDom =
 	(typeof window !== 'undefined' && window.name === 'nodejs') ||
 	(typeof navigator !== 'undefined' &&
-		(navigator.userAgent.includes('Node.js') ||
-			navigator.userAgent.includes('jsdom')));
+		(navigator.userAgent.includes('Node.js') || navigator.userAgent.includes('jsdom')));

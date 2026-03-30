@@ -38,11 +38,7 @@ describe('Validator', () => {
 		});
 
 		it('should prase validation message', () => {
-			let msg = parseValidationMessage(
-				'The %l requires %p characters',
-				'field',
-				'10'
-			);
+			let msg = parseValidationMessage('The %l requires %p characters', 'field', '10');
 			expect(msg).toBe('The field requires 10 characters');
 
 			msg = parseValidationMessage('The %l is required', 'field');
@@ -70,10 +66,7 @@ describe('Validator', () => {
 				expect(rule.name).toBe(item.name);
 
 				const valid = rule.hook(item.values[0], item.parameter);
-				expect(
-					valid,
-					`${rule.name} should validate ${item.values[0]}`
-				).toBe(true);
+				expect(valid, `${rule.name} should validate ${item.values[0]}`).toBe(true);
 			}
 		});
 
@@ -91,10 +84,7 @@ describe('Validator', () => {
 
 				const valid = rule.hook(item.invalids[0], item.parameter);
 
-				expect(
-					valid,
-					`${rule.name} should not validate ${item.invalids[0]}`
-				).toBe(false);
+				expect(valid, `${rule.name} should not validate ${item.invalids[0]}`).toBe(false);
 			}
 		});
 	});
@@ -137,12 +127,8 @@ describe('Validator', () => {
 				expect(errors).toHaveLength(1);
 				expect(errors[0].value).toBe(validateArgs.value);
 				expect(errors[0].rule).toBe(validateArgs.rules[0].name);
-				expect(errors[0].parameter).toBe(
-					validateArgs.rules[0].parameter
-				);
-				expect(errors[0].error).toMatch(
-					new RegExp(`^<em>${validateArgs.label}</em>`)
-				);
+				expect(errors[0].parameter).toBe(validateArgs.rules[0].parameter);
+				expect(errors[0].error).toMatch(new RegExp(`^<em>${validateArgs.label}</em>`));
 			}
 		});
 
@@ -266,9 +252,7 @@ describe('Validator', () => {
 		});
 
 		it('should get the label for an input', () => {
-			const emailInput = document.getElementById(
-				'email'
-			) as HTMLInputElement;
+			const emailInput = document.getElementById('email') as HTMLInputElement;
 			const label = getInputLabel(emailInput);
 			expect(label).toBe('Email');
 		});
@@ -279,9 +263,7 @@ describe('Validator', () => {
 		});
 
 		it('should parse validation arguments for email input', () => {
-			const emailInput = document.getElementById(
-				'email'
-			) as HTMLInputElement;
+			const emailInput = document.getElementById('email') as HTMLInputElement;
 			emailInput.value = 'someone@test.test';
 			const args = parseValidationArgsFromInput({ value: emailInput });
 			expect(args).toStrictEqual({
@@ -301,9 +283,7 @@ describe('Validator', () => {
 			expect(errs.length).toBe(0);
 
 			const errMsg = 'noop, that is not an email';
-			const emailInput = document.getElementById(
-				'email'
-			) as HTMLInputElement;
+			const emailInput = document.getElementById('email') as HTMLInputElement;
 
 			renderValidationError(emailInput, errMsg);
 
@@ -321,9 +301,7 @@ describe('Validator', () => {
 		});
 
 		it('should not validate a required email input', () => {
-			const emailInput = document.getElementById(
-				'email'
-			) as HTMLInputElement;
+			const emailInput = document.getElementById('email') as HTMLInputElement;
 			emailInput.value = 'not-an-email';
 
 			const validationArgs = {
@@ -336,9 +314,7 @@ describe('Validator', () => {
 			expect(errors[0]).toHaveProperty('error');
 			expect(errors[0].value).toBe(emailInput.value);
 			expect(errors[0].rule).toBe('email');
-			expect(errors[0].error).toBe(
-				"You've got to use a real email bro at Email"
-			);
+			expect(errors[0].error).toBe("You've got to use a real email bro at Email");
 
 			const errs = document.querySelectorAll('.validation-error');
 			const msgs = document.querySelectorAll('.validation-error-message');
@@ -350,9 +326,7 @@ describe('Validator', () => {
 		});
 
 		it('should validate a required email input', () => {
-			const emailInput = document.getElementById(
-				'email'
-			) as HTMLInputElement;
+			const emailInput = document.getElementById('email') as HTMLInputElement;
 			emailInput.value = 'tester@testington.tst';
 
 			const validationArgs = {
@@ -368,9 +342,7 @@ describe('Validator', () => {
 		});
 
 		it('should validate select input form', () => {
-			const select = document.getElementById(
-				'test-select'
-			) as HTMLSelectElement;
+			const select = document.getElementById('test-select') as HTMLSelectElement;
 
 			expect(select).toBeDefined();
 

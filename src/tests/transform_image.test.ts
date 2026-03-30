@@ -57,9 +57,7 @@ describe('transform_image', function () {
 		const options: TransformOptions = { fit, height, width };
 		const url = transformImage(TEST_IMG, options);
 
-		expect(url).toBe(
-			`${ROOT_URL}/f_${fit},h_${height},w_${width}/testing/default`
-		);
+		expect(url).toBe(`${ROOT_URL}/f_${fit},h_${height},w_${width}/testing/default`);
 	});
 
 	it('should change the image background', function () {
