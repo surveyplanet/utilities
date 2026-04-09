@@ -4,6 +4,6 @@ npm run clean \
 && npm run format \
 && npm run lint \
 && npm run type \
-&& npm run test \
+&& npm test -- run \
 && npm run build \
 && npm run release:dry

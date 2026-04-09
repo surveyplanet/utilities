@@ -59,14 +59,21 @@
 		"lint": "eslint src",
 		"release": "semantic-release",
 		"release:dry": "semantic-release --dry-run",
-		"spell": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
-		"test": "vitest run",
+		"spell": "cspell .",
+		"test": "vitest",
 		"test:coverage": "vitest run --coverage",
-		"test:watch": "vitest watch",
 		"type": "tsc --noEmit",
 		"type:dts": "tsc --emitDeclarationOnly"
 	},
 	"prettier": "@surveyplanet/lint-config/prettier",
+	"peerDependencies": {
+		"throttle-debounce": "^5.0.2"
+	},
+	"peerDependenciesMeta": {
+		"throttle-debounce": {
+			"optional": true
+		}
+	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@semantic-release/commit-analyzer": "^13.0.1",
@@ -89,8 +96,5 @@
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.57.2",
 		"vitest": "^4.1.2"
-	},
-	"dependencies": {
-		"throttle-debounce": "^5.0.2"
 	}
 }

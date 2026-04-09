@@ -1,6 +1,6 @@
 name: Deploy utilities
 
-on: [ push ]
+on: [push]
 
 jobs:
   utilities:
@@ -46,7 +46,7 @@ jobs:
         run: npm run spell
 
       - name: Test
-        run: npm run test
+        run: npm test -- run
 
       - name: Release
         env:
