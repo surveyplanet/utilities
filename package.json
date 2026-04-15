@@ -48,7 +48,8 @@
 		"./transform_image": "./dist/transform_image.js",
 		"./truncate": "./dist/truncate.js",
 		"./unique_id": "./dist/unique_id.js",
-		"./validate": "./dist/validate.js"
+		"./validate": "./dist/validate.js",
+		"./to_boolean": "./dist/to_boolean.js"
 	},
 	"scripts": {
 		"build": "rm -rf dist && tsc",
