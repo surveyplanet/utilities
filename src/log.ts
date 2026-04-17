@@ -1,5 +1,6 @@
 import pino from 'pino';
 
+// I am reusing the log from models.
 type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal';
 type LogMethod = (object: Record<string, unknown>, message: string) => void;
 
