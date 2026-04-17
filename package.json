@@ -49,7 +49,8 @@
 		"./truncate": "./dist/truncate.js",
 		"./unique_id": "./dist/unique_id.js",
 		"./validate": "./dist/validate.js",
-		"./to_boolean": "./dist/to_boolean.js"
+		"./to_boolean": "./dist/to_boolean.js",
+		"./log": "./dist/log.js"
 	},
 	"scripts": {
 		"build": "rm -rf dist && tsc",
@@ -98,5 +99,8 @@
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.58.1",
 		"vitest": "^4.1.4"
+	},
+	"dependencies": {
+		"pino": "^10.3.1"
 	}
 }
