@@ -47,9 +47,15 @@ export function parseDuration(ms: number, { humanize = false }: ParseDurationOpt
 
 	if (humanize) {
 		const parts: string[] = [];
-		if (hours) parts.push(`${hours}h`);
-		if (minutes) parts.push(`${minutes}m`);
-		if (seconds || parts.length === 0) parts.push(`${seconds}s`);
+		if (hours) {
+			parts.push(`${hours}h`);
+		}
+		if (minutes) {
+			parts.push(`${minutes}m`);
+		}
+		if (seconds || parts.length === 0) {
+			parts.push(`${seconds}s`);
+		}
 		return parts.join(' ');
 	}
 

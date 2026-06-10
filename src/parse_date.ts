@@ -71,11 +71,15 @@ export function parseDate(date: Date | string | number, options: ParseDateOption
 		...FORMAT_OPTIONS[format],
 	};
 
-	if (options.includeTimeZone) args.timeZoneName = 'short';
+	if (options.includeTimeZone) {
+		args.timeZoneName = 'short';
+	}
 
 	if (options.compact) {
 		delete args.weekday;
-		if (options.format !== 'time') args.month = 'short';
+		if (options.format !== 'time') {
+			args.month = 'short';
+		}
 	}
 
 	if (options.short) {

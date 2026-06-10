@@ -21,8 +21,12 @@ export function smartSort<T extends { [K in keyof T]: unknown }>(
 		}
 
 		// undefined or null
-		if (a[key] == null) return ascending ? -1 : 1;
-		if (b[key] == null) return ascending ? 1 : -1;
+		if (a[key] == null) {
+			return ascending ? -1 : 1;
+		}
+		if (b[key] == null) {
+			return ascending ? 1 : -1;
+		}
 
 		// Strings
 		// if (typeof a[key] === 'string' && typeof b[key] === 'string') {

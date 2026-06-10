@@ -10,7 +10,9 @@
  * @returns {string}
  */
 export const titleize = (str: string): string => {
-	if (!str) return str;
+	if (!str) {
+		return str;
+	}
 
 	// Split the string into words
 	const words = str.split(/\s+/);

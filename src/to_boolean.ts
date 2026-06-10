@@ -2,9 +2,15 @@ function boolMatch(s: string, matchers: Array<string | RegExp>): boolean {
 	const down = s.toLowerCase();
 
 	for (const matcher of matchers) {
-		if (!matcher) continue;
-		if (matcher instanceof RegExp && matcher.test(s)) return true;
-		if (typeof matcher === 'string' && matcher.toLowerCase() === down) return true;
+		if (!matcher) {
+			continue;
+		}
+		if (matcher instanceof RegExp && matcher.test(s)) {
+			return true;
+		}
+		if (typeof matcher === 'string' && matcher.toLowerCase() === down) {
+			return true;
+		}
 	}
 
 	return false;

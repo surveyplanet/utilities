@@ -179,4 +179,20 @@ describe('transform_image', function () {
 		const url = transformImage(TEST_IMG, options);
 		expect(url).toBe(`${ROOT_URL}/w_${value}/testing/default`);
 	});
+
+	it('should apply transformations on staging server URLs', function () {
+		const stagingRoot = 'https://media.spstage.us';
+		const img = `${stagingRoot}/testing/default`;
+		const options: TransformOptions = { width: 100 };
+		const url = transformImage(img, options);
+		expect(url).toBe(`${stagingRoot}/w_100/testing/default`);
+	});
+
+	it('should apply transformations on dev server URLs', function () {
+		const devRoot = 'https://media.splocal.us';
+		const img = `${devRoot}/testing/default`;
+		const options: TransformOptions = { width: 100 };
+		const url = transformImage(img, options);
+		expect(url).toBe(`${devRoot}/w_100/testing/default`);
+	});
 });

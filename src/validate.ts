@@ -354,8 +354,12 @@ export const RULES: ValidatorRule[] = [
 		description: 'Must be a comma separated list of file types e.g.: gif,png,jpg.',
 		parameterRequired: true,
 		hook: (value, param) => {
-			if (typeof param !== 'string') return false;
-			if (!param.length) return false;
+			if (typeof param !== 'string') {
+				return false;
+			}
+			if (!param.length) {
+				return false;
+			}
 
 			const extTypes = param.split(',').map((e) => e.trim());
 			const ext = value.split('.').pop();
@@ -653,8 +657,12 @@ export const parseRule = (str: string): ValidateArgsRule => {
 		return result;
 	}
 
-	if (execArr.length > 1) result.name = execArr[1];
-	if (execArr.length > 2) result.parameter = execArr[2];
+	if (execArr.length > 1) {
+		result.name = execArr[1];
+	}
+	if (execArr.length > 2) {
+		result.parameter = execArr[2];
+	}
 
 	return result;
 };

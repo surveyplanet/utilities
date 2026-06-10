@@ -20,8 +20,14 @@ export function ordinalSuffix(val: number): string {
 	const absVal = Math.abs(val); // make sure negative numbers are handled correctly
 	const lastDigit = absVal % 10;
 	const lastTwoDigits = absVal % 100;
-	if (lastDigit === 1 && lastTwoDigits !== 11) return `${val}st`;
-	if (lastDigit === 2 && lastTwoDigits !== 12) return `${val}nd`;
-	if (lastDigit === 3 && lastTwoDigits !== 13) return `${val}rd`;
+	if (lastDigit === 1 && lastTwoDigits !== 11) {
+		return `${val}st`;
+	}
+	if (lastDigit === 2 && lastTwoDigits !== 12) {
+		return `${val}nd`;
+	}
+	if (lastDigit === 3 && lastTwoDigits !== 13) {
+		return `${val}rd`;
+	}
 	return `${val}th`;
 }

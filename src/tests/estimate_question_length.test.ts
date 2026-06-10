@@ -1,6 +1,6 @@
 import { type Question } from '@surveyplanet/types';
 
-import fixtures from '@surveyplanet/types/fixtures';
+import * as questionData from '@surveyplanet/fixtures/questions';
 import { expect, test, describe } from 'vitest';
 import { estimateQuestionLength } from '../index.js';
 
@@ -24,52 +24,52 @@ describe('Estimate question length', function () {
 	});
 
 	test('should estimate single-select multiple choice question length', function () {
-		const question = { ...fixtures.questions.multipleChoice };
+		const question = { ...questionData.multipleChoice };
 		expect(question.type).toBe('multiple_choice');
 		expect(estimateQuestionLength(question)).toBe(7.5);
 	});
 	test('should estimate multi-select multiple choice question length', function () {
-		const question = { ...fixtures.questions.multipleChoiceMulti };
+		const question = { ...questionData.multipleChoiceMulti };
 		expect(question.type).toBe('multiple_choice');
 		expect(estimateQuestionLength(question)).toBe(67.5);
 	});
 	test('should estimate essay question length', function () {
-		const question = { ...fixtures.questions.essay };
+		const question = { ...questionData.essay };
 		expect(question.type).toBe('essay');
 		expect(estimateQuestionLength(question)).toBe(22.5);
 	});
 	test('should estimate rating question length', function () {
-		const question = { ...fixtures.questions.rating };
+		const question = { ...questionData.rating };
 		expect(question.type).toBe('rating');
 		expect(estimateQuestionLength(question)).toBe(7.5);
 	});
 	test('should estimate scale question length', function () {
-		const question = { ...fixtures.questions.scale };
+		const question = { ...questionData.scale };
 		expect(question.type).toBe('scale');
 		expect(estimateQuestionLength(question)).toBe(7.5);
 	});
 	test('should estimate form question length', function () {
-		const question = { ...fixtures.questions.form };
+		const question = { ...questionData.form };
 		expect(question.type).toBe('form');
 		expect(estimateQuestionLength(question)).toBe(112.5);
 	});
 	test('should estimate scoring question length', function () {
-		const question = { ...fixtures.questions.scoring };
+		const question = { ...questionData.scoring };
 		expect(question.type).toBe('scoring');
 		expect(estimateQuestionLength(question)).toBe(30);
 	});
 	test('should estimate range question length', function () {
-		const question = { ...fixtures.questions.range };
+		const question = { ...questionData.range };
 		expect(question.type).toBe('range');
 		expect(estimateQuestionLength(question)).toBe(7.5);
 	});
 	test('should estimate dateTime question length', function () {
-		const question = { ...fixtures.questions.dateTime };
+		const question = { ...questionData.dateTime };
 		expect(question.type).toBe('date_time');
 		expect(estimateQuestionLength(question)).toBe(7.5);
 	});
 	test('should estimate image question length', function () {
-		const question = { ...fixtures.questions.image };
+		const question = { ...questionData.image };
 		expect(question.type).toBe('image');
 		expect(estimateQuestionLength(question)).toBe(22.5);
 	});

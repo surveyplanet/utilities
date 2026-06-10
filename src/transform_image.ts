@@ -38,7 +38,11 @@ const SHORTCUTS: Record<keyof TransformOptions, string> = {
 	width: 'w',
 };
 
-const ROOT_URL = 'https://media.surveyplanet.com';
+const ROOT_URLS = [
+	'https://media.surveyplanet.com',
+	'https://media.spstage.us',
+	'https://media.splocal.us',
+];
 
 /**
  * Resize SurveyPlanet media server images
@@ -77,7 +81,8 @@ export const transformImage = (
 	format?: 'png' | 'jpg' | 'jpeg' | 'gif'
 ): string => {
 	// console.log('transformImage', url, options, format);
-	if (url.length <= 0 || !url.startsWith(ROOT_URL)) {
+	const rootUrl = ROOT_URLS.find((r) => url.startsWith(r));
+	if (url.length <= 0 || !rootUrl) {
 		return url;
 	}
 
@@ -110,7 +115,7 @@ export const transformImage = (
 		.join(',');
 
 	if (transformations.length > 0) {
-		url = url.replace(ROOT_URL + '/', `${ROOT_URL}/${transformations}/`);
+		url = url.replace(rootUrl + '/', `${rootUrl}/${transformations}/`);
 	}
 
 	return url;
